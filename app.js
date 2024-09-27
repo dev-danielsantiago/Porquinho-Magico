@@ -232,11 +232,13 @@ app.post('/apostar', async (req, res) => {
 
         // Processa a aposta e atualiza os saldos
         if (resultado === 'ganhou') {
-            player.saldo += valorApostaNumerico; // O jogador ganha
-            mestre.saldo -= valorApostaNumerico; // O "Mestre" perde
+            const valorGanho = valorApostaNumerico * 7;
+            player.saldo += valorGanho; // O jogador ganha 7x o valor apostado
+            mestre.saldo -= valorGanho; // O "Mestre" perde
         } else if (resultado === 'perdeu') {
-            player.saldo -= valorApostaNumerico; // O jogador perde
-            mestre.saldo += valorApostaNumerico; // O "Mestre" ganha
+            const valorPerdido = valorApostaNumerico * 2;
+            player.saldo -= valorPerdido; // O jogador perde 2x o valor apostado
+            mestre.saldo += valorPerdido; // O "Mestre" ganha
         } else {
             return res.status(400).json({ success: false, message: 'Resultado inválido.' });
         }
@@ -244,7 +246,15 @@ app.post('/apostar', async (req, res) => {
         // Atualiza o arquivo JSON
         await fs.promises.writeFile('data/players.json', JSON.stringify({ jogadores: players }));
 
-        return res.status(200).json({ success: true, message: 'Aposta processada com sucesso!', saldo: player.saldo });
+        // Resposta com jogadas e saldo atualizado
+        return res.status(200).json({
+            success: true,
+            message: 'Aposta processada com sucesso!',
+            saldo: player.saldo,
+            jogadaJogador: jogada,
+            jogadaPorquinho: jogadaComputador,
+            resultado: resultado === 'ganhou' ? 'Você ganhou!' : 'Você perdeu!'
+        });
     } catch (error) {
         console.error('Erro ao processar a aposta:', error);
         return res.status(500).json({ success: false, message: 'Erro ao processar a aposta.' });

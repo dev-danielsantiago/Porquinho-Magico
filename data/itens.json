@@ -1,0 +1,44 @@
+{
+    "normal": [
+        {
+            "nome": "Espada Comum",
+            "descricao": "Uma espada comum, mas afiada.",
+            "imagem": "img/espada_comum.jpg",
+            "tipo": "arma"
+        },
+        {
+            "nome": "Poção de Vida",
+            "descricao": "Restaura 50 de vida.",
+            "imagem": "img/poção_vida.jpg",
+            "tipo": "item"
+        }
+    ],
+    "superior": [
+        {
+            "nome": "Espada Mágica",
+            "descricao": "Uma espada que brilha com magia.",
+            "imagem": "img/espada_magica.jpg",
+            "tipo": "arma"
+        },
+        {
+            "nome": "Elixir da Sabedoria",
+            "descricao": "Aumenta o conhecimento do usuário.",
+            "imagem": "img/elixir_sabedoria.jpg",
+            "tipo": "item"
+        }
+    ],
+    "lenda": [
+        {
+            "nome": "Excalibur",
+            "descricao": "A famosa espada do rei Arthur.",
+            "imagem": "img/excalibur.jpg",
+            "tipo": "arma"
+        },
+        {
+            "nome": "Capa da Invisibilidade",
+            "descricao": "Torna o usuário invisível.",
+            "imagem": "img/capa_invisibilidade.jpg",
+            "tipo": "item"
+        }
+    ]
+}

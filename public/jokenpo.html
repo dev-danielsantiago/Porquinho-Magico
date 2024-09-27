@@ -61,6 +61,46 @@
             }
         }
 
+        // Chama a função de atualizar saldo assim que a página carregar
+        window.onload = function() {
+            atualizarSaldo();
+        };
+
+        // Função para determinar o resultado do jogo Jokenpo
+        function calcularResultado(jogadaJogador, jogadaComputador) {
+            if (jogadaJogador === jogadaComputador) {
+                return 'empate';
+            } else if (
+                (jogadaJogador === 'pedra' && jogadaComputador === 'tesoura') ||
+                (jogadaJogador === 'tesoura' && jogadaComputador === 'papel') ||
+                (jogadaJogador === 'papel' && jogadaComputador === 'pedra')
+            ) {
+                return 'ganhou';
+            } else {
+                return 'perdeu';
+            }
+        }
+
+        // Função para escolher a jogada da máquina com probabilidade de vitória, empate e derrota
+        function escolhaJogadaPorquinho(jogadaJogador) {
+            const probabilidade = Math.random(); // Gera um número aleatório entre 0 e 1
+
+            if (probabilidade <= 0.35) {                                 // POSSIBILIDADE DE VITORIA DO PORCO
+                // Vitória do jogador (35%)
+                if (jogadaJogador === 'pedra') return 'tesoura';
+                if (jogadaJogador === 'papel') return 'pedra';
+                if (jogadaJogador === 'tesoura') return 'papel';
+            } else if (probabilidade <= 0.65) {
+                // Empate (30%)                                   // POSSIBILIDADE DE DERROTA DO PORCO
+                return jogadaJogador;  
+            } else {                                            // O QUE SOBRA É DERROTA
+                // Derrota do jogador (35%) 
+                if (jogadaJogador === 'pedra') return 'papel';
+                if (jogadaJogador === 'papel') return 'tesoura';
+                if (jogadaJogador === 'tesoura') return 'pedra';
+            }
+        }
+
         // Fazer a aposta
         document.getElementById('apostarBtn').addEventListener('click', async () => {
             const valorAposta = parseFloat(document.getElementById('valorAposta').value);
@@ -87,44 +127,21 @@
                 return;
             }
 
-            // Lógica do jogo Jokenpo com 20% de chance de vitória
-            const jogadas = ['pedra', 'papel', 'tesoura'];
-            const jogadaComputador = jogadas[Math.floor(Math.random() * jogadas.length)];
-            const randomValue = Math.random(); // Gera um valor aleatório entre 0 e 1
+            // Escolha da jogada (Sr. Porquinho) com probabilidade
+            const jogadaComputador = escolhaJogadaPorquinho(jogada);
 
-            let resultado;
-            let ganho = 0;
+            // Determina o resultado do jogo
+            const resultado = calcularResultado(jogada, jogadaComputador);
 
-            if (randomValue < 0.2) {
-                resultado = 'ganhou';
-                ganho = valorAposta * 7; // O jogador ganha 7 vezes a aposta
-            } else if (randomValue < 0.3) {
-                resultado = 'empate';
-                ganho = 0; // Sem ganho
-            } else {
-                resultado = 'perdeu';
-                ganho = -valorAposta * 2; // O jogador perde o valor da aposta
-            }
-
-            // Atualiza a imagem do porquinho de acordo com o resultado
-            if (resultado === 'ganhou') {
+            let ganho = 0;                         
+            if (resultado === 'ganhou') {                                        //MULTIPLICADORES DE GANHO E DERROTAS
+                ganho = valorAposta * 8; // O jogador ganha 7 vezes a aposta
                 porcoImg.src = 'img/perdeu.jpg'; // Imagem de vitória
-                // Reduz o saldo do mestre
-                await fetch(`/atualizar-saldo-mestre`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ valor: -ganho }) // Reduzindo o saldo do mestre
-                });
             } else if (resultado === 'perdeu') {
+                ganho = -valorAposta * 2; // O jogador perde o dobro da aposta
                 porcoImg.src = 'img/ganhou.jpg'; // Imagem de derrota
-                // Aumenta o saldo do mestre
-                await fetch(`/atualizar-saldo-mestre`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ valor: ganho }) // Aumentando o saldo do mestre
-                });
             } else {
-                porcoImg.src = 'img/esperando.jpg'; // Imagem de esperando
+                porcoImg.src = 'img/esperando.jpg'; // Imagem de empate
             }
 
             // Registrar a aposta no servidor
@@ -140,6 +157,11 @@
                 const resultData = await apostaResponse.json();
 
                 let mensagem = `Você apostou $ ${valorAposta.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}.<br>`;
+                
+                // Exibe a jogada do jogador e do Sr. Porquinho
+                mensagem += `Sua jogada: ${jogada}.<br>`;
+                mensagem += `(Sr. Porquinho): ${jogadaComputador}.<br>`;
+
                 if (resultado === 'ganhou') {
                     mensagem += `<span id="ganhou">Parabéns! Você ganhou $${(ganho).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}! 🎉</span> <br>`;
                 } else if (resultado === 'perdeu') {
@@ -148,26 +170,22 @@
                     mensagem += '<span id="empate">Empate! Ninguém ganhou.</span> <br>';
                 }
 
-                // Usando innerHTML para permitir que as quebras de linha sejam interpretadas
-                document.getElementById('apostaMsg').innerHTML = `${mensagem} Jogada do Sr Porquinho: ${jogadaComputador}. ${resultData.message} <br>`;
-
-                // Atualizar saldo após aposta
-                await atualizarSaldo();
+                document.getElementById('apostaMsg').innerHTML = mensagem;
+                atualizarSaldo(); // Atualiza o saldo do jogador após a aposta
             } catch (error) {
-                console.error('Erro ao fazer aposta:', error);
+                console.error('Erro ao registrar a aposta:', error);
+                document.getElementById('apostaMsg').innerText = 'Erro ao processar a aposta. Tente novamente.';
             }
         });
 
         // Selecionar jogada
-        document.querySelectorAll('.jogada').forEach(button => {
+        const jogadaButtons = document.querySelectorAll('.jogada');
+        jogadaButtons.forEach(button => {
             button.addEventListener('click', () => {
-                document.querySelectorAll('.jogada').forEach(btn => btn.classList.remove('selected'));
+                jogadaButtons.forEach(btn => btn.classList.remove('selected'));
                 button.classList.add('selected');
             });
         });
-
-        // Atualizar saldo ao carregar a página
-        atualizarSaldo();
     </script>
 </body>
 
