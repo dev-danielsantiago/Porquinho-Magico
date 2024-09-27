@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Porquinho Mágico</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="img/porquinho (1).png" type="image/x-icon">
+</head>
+
+<body>
+    <img src="img/cofrePorco.png" alt="Logo do Porquinho">
+    <h1>Bem-vindo </h1> 
+    <h2>Porquinho Mágico</h2> 
+    <form id="loginForm">
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username" placeholder="Digite seu nick" required>
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+
+        <button type="submit">Entrar</button>
+    </form>
+    <div id="msg"></div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const senha = document.getElementById('senha').value;
+
+            const response = await fetch(`/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, senha })
+            });
+
+            const result = await response.json();
+            document.getElementById('msg').innerText = result.message;
+
+            if (response.ok) {
+                // Armazenar saldo e username, e redirecionar para a próxima página
+                localStorage.setItem('saldo', result.saldo);
+                localStorage.setItem('username', username); // Armazenar o username
+
+                // Redirecionar para o dashboard do mestre se for mestre
+                if (result.isMestre) {
+                    window.location.href = 'dashboard-mestre'; // Redireciona para a página do dashboard do mestre
+                } else {
+                    window.location.href = 'dashboard.html'; // Redireciona para a página do dashboard dos jogadores
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

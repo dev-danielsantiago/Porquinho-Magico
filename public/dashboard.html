@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="img/porquinho (1).png" type="image/x-icon">
+    
+    <title>Dashboard - Porquinho Mágico</title>
+</head>
+<body>
+    <header>
+        
+            <h1>Porquinho</h1>
+
+            <ul>
+                
+                <li><a href="jokenpo.html">✌️Jokenpo✊</a></li>
+            </ul>
+        
+    </header>
+    
+    <h2>Sua conta Bancária</h2>    
+    <img src="img/poupanca.png" alt="">
+    
+    <div id="usuario"></div> <!-- Mensagem de boas-vindas -->
+    <div id="saldoContainer">
+        <h2>Seu Saldo</h2>
+        <div id="saldo"></div>
+    </div>
+    
+<h2>Transferir Dinheiro</h2>
+    <form id="transferForm">
+        <label for="destinatario">Destinatário:</label>
+        <select id="destinatario" name="destinatario" required>
+            <!-- Jogadores serão carregados aqui -->
+        </select>
+
+        <label for="valor">Valor:</label>
+        <input type="number" id="valor" name="valor" required>
+        <div id="transferMsg" class="error"></div>
+        <button type="submit">Transferir</button>
+    </form>
+    
+
+<!--  <h2>Transações</h2>
+    <table border="1" id="tabela-transacoes">
+        <tr>
+            <th>Tipo</th>
+            <th>Remetente</th>
+            <th>Destinatário</th>
+            <th>Valor</th>
+            <th>Data</th>
+        </tr>
+    </table> -->
+
+    <script>
+        // Mostrar nome do usuário
+        const username = localStorage.getItem('username');
+        document.getElementById('usuario').innerText = `Bem-vindo, ${username}!`;
+
+        // Função para atualizar o saldo do jogador
+        async function atualizarSaldo() {
+            try {
+                const response = await fetch(`/saldo/${username}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    const saldoAtualizado = parseFloat(data.saldo).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+                    document.getElementById('saldo').innerText = `Dracmas: $ ${saldoAtualizado}`;
+                } else {
+                    console.error('Erro ao buscar saldo atualizado:', data.message);
+                }
+            } catch (error) {
+                console.error('Erro ao atualizar saldo:', error);
+            }
+        }
+
+        // Mostrar saldo formatado ao carregar a página
+        atualizarSaldo();
+
+        async function carregarJogadores() {
+            try {
+                const response = await fetch('/saldo-jogadores');
+                const jogadores = await response.json();
+
+                const destinatarioSelect = document.getElementById('destinatario');
+                jogadores.forEach(jogador => {
+                    const option = document.createElement('option');
+                    option.value = jogador.username;
+                    option.textContent = jogador.username;
+                    destinatarioSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar jogadores:', error);
+            }
+        }
+
+        document.getElementById('transferForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const destinatario = document.getElementById('destinatario').value;
+            const valor = document.getElementById('valor').value;
+
+            try {
+                const response = await fetch(`/transfer`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ destinatario, valor, username })
+                });
+
+                const result = await response.json();
+                document.getElementById('transferMsg').innerText = result.message;
+
+                if (response.ok) {
+                    // Adiciona classe de sucesso
+                    document.getElementById('transferMsg').className = 'success';
+
+                    // Registrar a transação
+                    await fetch('/registrar-transacao', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ remetente: username, destinatario, valor })
+                    });
+
+                    // Atualizar o saldo do jogador
+                    await atualizarSaldo();
+
+                    // Atualizar as transações
+                    await carregarTransacoes();
+                } else {
+                    // Adiciona classe de erro
+                    document.getElementById('transferMsg').className = 'error';
+                }
+            } catch (error) {
+                console.error('Erro ao realizar transferência:', error);
+            }
+        });
+
+        // Função para carregar transações
+        async function carregarTransacoes() {
+            try {
+                const response = await fetch('/transacoes');
+                const transacoes = await response.json();
+                const tabela = document.getElementById('tabela-transacoes');
+
+                tabela.innerHTML = `
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Remetente</th>
+                        <th>Destinatário</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                    </tr>
+                `; // Limpa e recria o cabeçalho da tabela
+
+                transacoes.forEach(transacao => {
+                    const row = tabela.insertRow();
+                    const tipo = transacao.remetente === username ? 'Enviado' : 'Recebido';
+                    row.insertCell(0).innerText = tipo;
+                    row.insertCell(1).innerText = transacao.remetente;
+                    row.insertCell(2).innerText = transacao.destinatario;
+                    const valorFormatado = parseFloat(transacao.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+                    row.insertCell(3).innerText = `$ ${valorFormatado}`;
+                    row.insertCell(4).innerText = new Date(transacao.data).toLocaleString('pt-BR');
+                });
+            } catch (error) {
+                console.error('Erro ao carregar transações:', error);
+            }
+        }
+
+        // Carregar jogadores e transações ao iniciar a página
+        window.onload = async () => {
+            await carregarJogadores();
+            await carregarTransacoes();
+        };
+    </script>
+</body>
+</html>
