@@ -159,7 +159,10 @@ tr:hover {
 
 .success {
     color: green;
+    font-weight: 500;
+    padding: 10px 0;
 }
+
 
 /* Responsivo */
 @media (max-width: 768px) {

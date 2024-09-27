@@ -1,147 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="jokenpo.css">
     <title>Apostas - Porquinho Mágico</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box; /* Adicionando box-sizing */
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            list-style: none;
-        }
-        a, button{
-            text-decoration: none;
-            font-weight: 500;
-            color: white;
-        }
-        header {
-            background-color: black;
-            color: #eead2d;
-            padding: 20px 0;
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        input, button {
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 100%; /* Tornando o input responsivo */
-            max-width: 300px; /* Largura máxima do input */
-            margin: 10px auto; /* Centraliza o input */
-        }
-        input:focus {
-            border-color: #007BFF;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-            outline: none;
-        }
-        #game {
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        #game h2 {
-            color: #28a745;
-        }
-        .jogada {
-            font-size: 24px;
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #131212;
-            color: #eead2d;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .jogada:hover {
-            background-color: #0056b3;
-        }
-        .selected {
-            background-color: #28a745;
-        }
-        #apostarBtn, button {
-            font-size: 18px;
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        #apostarBtn:hover {
-            background-color: #218838;
-        }
-        #apostaMsg {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #333;
-        }
-
-        .textDiv{
-            font-size: 1.2rem;
-            font-weight: 760;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.014);
-        }
-
-        .textLabel {
-            font-weight: 100;
-            font-style: italic;
-        }
-        #senhorPorco{
-            max-width: 250px;
-            text-align: center;
-            margin: auto;
-        }
-    </style>
 </head>
+
 <body>
     <header>
-        <h1>Apostas Com Porquinho</h1>
-        <a href="dashboard.html">👉 Voltar para a Dashboard 👈</a>
-        <button id="desafiarBtn">Desafiar Jogador</button>
-
+        <h1>Jokenpo</h1>
+        <a href="dashboard.html" class="botão-00">👈Voltar</a>
     </header>
 
     <div id="usuario" class="textDiv"></div>
     <div id="saldo" class="textDiv"></div>
 
     <div id="game">
-        <img src="img/12a2af20ab1916d9bb2450ce48ed72c53a689166r1-447-329v2_00.jpg" alt=""  id="senhorPorco">
-        <h2>Fazer Aposta - Jokenpo</h2>
+        <img src="img/esperando.jpg" alt="Porco Esperando" id="porcoImg">
+        <h2>Fazer Aposta</h2>
         <div id="apostaMsg"></div>
         <label for="valorAposta" class="textLabel">Valor da Aposta (até 10.000 Dracmas):</label>
         <input type="number" id="valorAposta" name="valorAposta" required max="10000" placeholder="Pode apostar até 10 mil Dracmas">
 
         <h3>Escolha sua jogada:</h3>
-        <button class="jogada" data-jogada="pedra">✊ Pedra</button>
-        <button class="jogada" data-jogada="papel">✋ Papel</button>
-        <button class="jogada" data-jogada="tesoura">✌️ Tesoura</button>
+        <div class="jogada-container">
+            <button class="jogada" data-jogada="pedra">✊ Pedra</button>
+            <button class="jogada" data-jogada="papel">✋ Papel</button>
+            <button class="jogada" data-jogada="tesoura">✌️ Tesoura</button>
+        </div>
 
-        <button id="apostarBtn">Apostar</button> 
-        
+        <button id="apostarBtn">Apostar</button>
     </div>
 
+    <audio id="audioBackground" src="audio/fundo.mp3" loop autoplay></audio>
+
     <script>
+        // Ajustar o volume do áudio
+        const audioBackground = document.getElementById('audioBackground');
+        audioBackground.volume = 0.1; // Define o volume para 10%
+
         const username = localStorage.getItem('username');
         document.getElementById('usuario').innerText = `Usuário: ${username}`;
 
-        // Atualizar o saldo ao carregar a página
+        const porcoImg = document.getElementById('porcoImg');
+
+        // Função para atualizar o saldo
         async function atualizarSaldo() {
             try {
                 const response = await fetch(`/saldo/${username}`);
@@ -156,6 +61,7 @@
             }
         }
 
+        // Fazer a aposta
         document.getElementById('apostarBtn').addEventListener('click', async () => {
             const valorAposta = parseFloat(document.getElementById('valorAposta').value);
             const jogadaButton = document.querySelector('.jogada.selected');
@@ -190,17 +96,35 @@
             let ganho = 0;
 
             if (randomValue < 0.2) {
-                // Jogador ganha 20% das vezes
                 resultado = 'ganhou';
-                ganho = valorAposta * 7; // Ganho de 5x o valor apostado
+                ganho = valorAposta * 7; // O jogador ganha 7 vezes a aposta
             } else if (randomValue < 0.3) {
-                // Empate 10% das vezes
                 resultado = 'empate';
-                ganho = 0; // Empate, não ganha nem perde
+                ganho = 0; // Sem ganho
             } else {
-                // Jogador perde 70% das vezes
                 resultado = 'perdeu';
-                ganho = -valorAposta * 2; // Perda de 4x o valor apostado
+                ganho = -valorAposta * 2; // O jogador perde o valor da aposta
+            }
+
+            // Atualiza a imagem do porquinho de acordo com o resultado
+            if (resultado === 'ganhou') {
+                porcoImg.src = 'img/perdeu.jpg'; // Imagem de vitória
+                // Reduz o saldo do mestre
+                await fetch(`/atualizar-saldo-mestre`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ valor: -ganho }) // Reduzindo o saldo do mestre
+                });
+            } else if (resultado === 'perdeu') {
+                porcoImg.src = 'img/ganhou.jpg'; // Imagem de derrota
+                // Aumenta o saldo do mestre
+                await fetch(`/atualizar-saldo-mestre`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ valor: ganho }) // Aumentando o saldo do mestre
+                });
+            } else {
+                porcoImg.src = 'img/esperando.jpg'; // Imagem de esperando
             }
 
             // Registrar a aposta no servidor
@@ -215,17 +139,17 @@
 
                 const resultData = await apostaResponse.json();
 
-                // Mensagem com detalhes da aposta
-                let mensagem = `Você apostou $ ${valorAposta.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}. `;
+                let mensagem = `Você apostou $ ${valorAposta.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}.<br>`;
                 if (resultado === 'ganhou') {
-                    mensagem += `Parabéns! Você ganhou $ ${(ganho).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}! 🎉`;
+                    mensagem += `<span id="ganhou">Parabéns! Você ganhou $${(ganho).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}! 🎉</span> <br>`;
                 } else if (resultado === 'perdeu') {
-                    mensagem += `Você perdeu $ ${(-ganho).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}. 😔`;
+                    mensagem += `<span id="perdeu">Você perdeu $ ${(-ganho).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>. <br> 😔`;
                 } else {
-                    mensagem += 'Empate! Você não ganhou nem perdeu.';
+                    mensagem += '<span id="empate">Empate! Ninguém ganhou.</span> <br>';
                 }
 
-                document.getElementById('apostaMsg').innerText = `${mensagem} Jogada do computador: ${jogadaComputador}. ${resultData.message}`;
+                // Usando innerHTML para permitir que as quebras de linha sejam interpretadas
+                document.getElementById('apostaMsg').innerHTML = `${mensagem} Jogada do Sr Porquinho: ${jogadaComputador}. ${resultData.message} <br>`;
 
                 // Atualizar saldo após aposta
                 await atualizarSaldo();
@@ -246,4 +170,5 @@
         atualizarSaldo();
     </script>
 </body>
+
 </html>

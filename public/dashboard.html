@@ -33,9 +33,11 @@
         <h2>Seu Saldo</h2>
         <div id="saldo"></div>
     </div>
-    
+    <div id="transferMsg" class="error"></div>
 <h2>Transferir Dinheiro</h2>
+    
     <form id="transferForm">
+        
         <label for="destinatario">Destinatário:</label>
         <select id="destinatario" name="destinatario" required>
             <!-- Jogadores serão carregados aqui -->
@@ -43,7 +45,6 @@
 
         <label for="valor">Valor:</label>
         <input type="number" id="valor" name="valor" required>
-        <div id="transferMsg" class="error"></div>
         <button type="submit">Transferir</button>
     </form>
     

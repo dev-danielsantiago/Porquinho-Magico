@@ -108,7 +108,8 @@ function registrarTransacao(remetente, destinatario, valor, res) {
                 return res.status(500).json({ message: 'Erro ao atualizar os dados das transações.' });
             }
 
-            return res.status(200).json({ message: 'Transferência e transação registradas com sucesso!' });
+            // Mensagem com quebra de linha
+            return res.status(200).json({ message: '<br> Transferência e transação com sucesso!💸' });
         });
     });
 }
@@ -205,92 +206,47 @@ app.get('/saldo/:username', (req, res) => {
 });
 
 // Rota para apostas do Jokenpo
-app.post('/apostar', (req, res) => {
-    const { username, valorAposta, jogada, jogadaComputador, resultado, ganho } = req.body;
+app.post('/apostar', async (req, res) => {
+    const { username, valorAposta, jogada, jogadaComputador, resultado } = req.body;
 
-    fs.readFile('data/players.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ message: 'Erro ao ler os dados.' });
-        }
-
+    try {
+        // Carregar dados dos jogadores
+        const data = await fs.promises.readFile('data/players.json', 'utf8');
         const players = JSON.parse(data).jogadores;
         const player = players.find(p => p.username === username);
+        const mestre = players.find(p => p.username === 'Mestre');
 
-        if (!player) {
-            return res.status(404).json({ success: false, message: 'Usuário não encontrado.' });
+        if (!player || !mestre) {
+            return res.status(404).json({ success: false, message: 'Usuário ou mestre não encontrado.' });
         }
 
         const valorApostaNumerico = Number(valorAposta);
-        const ganhoNumerico = Number(ganho);
-
-        if (isNaN(valorApostaNumerico) || isNaN(ganhoNumerico)) {
-            return res.status(400).json({ message: 'Valor da aposta ou ganho inválido.' });
+        if (isNaN(valorApostaNumerico) || valorApostaNumerico <= 0) {
+            return res.status(400).json({ success: false, message: 'Valor de aposta inválido.' });
         }
 
-        // Atualizar saldo de acordo com o ganho ou perda
-        player.saldo += ganhoNumerico;
+        // Verifica se o saldo do jogador é suficiente
+        if (player.saldo < valorApostaNumerico) {
+            return res.status(400).json({ success: false, message: 'Saldo insuficiente para a aposta.' });
+        }
 
-        // Atualizar o arquivo JSON com o novo saldo
-        fs.writeFile('data/players.json', JSON.stringify({ jogadores: players }), (err) => {
-            if (err) {
-                return res.status(500).json({ message: 'Erro ao atualizar os dados.' });
-            }
+        // Processa a aposta e atualiza os saldos
+        if (resultado === 'ganhou') {
+            player.saldo += valorApostaNumerico; // O jogador ganha
+            mestre.saldo -= valorApostaNumerico; // O "Mestre" perde
+        } else if (resultado === 'perdeu') {
+            player.saldo -= valorApostaNumerico; // O jogador perde
+            mestre.saldo += valorApostaNumerico; // O "Mestre" ganha
+        } else {
+            return res.status(400).json({ success: false, message: 'Resultado inválido.' });
+        }
 
-            // Registrar a aposta como uma transação
-            registrarTransacao(username, 'Jokenpo', ganhoNumerico, res);
-        });
-    });
-});
+        // Atualiza o arquivo JSON
+        await fs.promises.writeFile('data/players.json', JSON.stringify({ jogadores: players }));
 
-
-/// DESAFIAR JOGADORES
-
-const express = require('express');
-const app = express();
-
-let partidas = {}; // Armazena partidas em andamento { id: { jogador1, jogador2, jogada1, jogada2, resultado }}
-
-app.use(express.json());
-
-// Iniciar uma nova partida
-app.post('/iniciar-partida', (req, res) => {
-    const { jogador1, jogador2 } = req.body;
-    const partidaId = Math.random().toString(36).substr(2, 9); // Gerar ID único
-    partidas[partidaId] = { jogador1, jogador2, jogada1: null, jogada2: null, resultado: null };
-    res.json({ partidaId });
-});
-
-// Jogador faz sua jogada
-app.post('/jogar/:partidaId', (req, res) => {
-    const { partidaId } = req.params;
-    const { jogador, jogada } = req.body;
-
-    const partida = partidas[partidaId];
-    if (!partida) return res.status(404).json({ error: 'Partida não encontrada' });
-
-    if (partida.jogador1 === jogador) {
-        partida.jogada1 = jogada;
-    } else if (partida.jogador2 === jogador) {
-        partida.jogada2 = jogada;
+        return res.status(200).json({ success: true, message: 'Aposta processada com sucesso!', saldo: player.saldo });
+    } catch (error) {
+        console.error('Erro ao processar a aposta:', error);
+        return res.status(500).json({ success: false, message: 'Erro ao processar a aposta.' });
     }
-
-    // Verificar se ambos jogaram
-    if (partida.jogada1 && partida.jogada2) {
-        const resultado = calcularResultado(partida.jogada1, partida.jogada2);
-        partida.resultado = resultado;
-        res.json({ resultado });
-    } else {
-        res.json({ message: 'Esperando o outro jogador...' });
-    }
-});
-
-function calcularResultado(jogada1, jogada2) {
-    const jogadas = { pedra: 'tesoura', papel: 'pedra', tesoura: 'papel' };
-    if (jogada1 === jogada2) return 'empate';
-    if (jogadas[jogada1] === jogada2) return 'jogador1 ganhou';
-    return 'jogador2 ganhou';
-}
-
-app.listen(3000, () => {
-    console.log('Servidor rodando na porta 3000');
 });
