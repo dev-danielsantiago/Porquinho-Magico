@@ -238,6 +238,7 @@ app.post('/presentear', (req, res) => {
 
         playerRemetente.saldo -= valor;
 
+        // Aqui você deve ler os itens disponíveis e selecionar um aleatório.
         fs.readFile(path.join(__dirname, 'data', 'itens.json'), 'utf8', (err, itensData) => {
             if (err) {
                 return res.status(500).json({ message: 'Erro ao ler os itens.' });
@@ -258,8 +259,8 @@ app.post('/presentear', (req, res) => {
             playerDestinatario.presentes.push({
                 tipo: tipoCaixa,
                 item: itemAleatorio.nome,
-                descricao: itemAleatorio.descricao,
                 tipoItem: itemAleatorio.tipo,
+                descricao: itemAleatorio.descricao,
                 imagem: itemAleatorio.imagem,
                 valor,
                 data: new Date()
@@ -285,18 +286,26 @@ app.post('/presentear', (req, res) => {
     });
 });
 
-// Rota para o mestre visualizar quem recebeu presentes
-app.get('/presentes-recebidos', (req, res) => {
+// Rota para obter os presentes recebidos de um jogador específico
+app.get('/presentes-recebidos/:username', (req, res) => {
+    const { username } = req.params; // Pega o nome de usuário dos parâmetros da URL
+
     fs.readFile(path.join(__dirname, 'data', 'players.json'), 'utf8', (err, data) => {
         if (err) {
             return res.status(500).json({ message: 'Erro ao ler os dados dos jogadores.' });
         }
 
         const players = JSON.parse(data).jogadores;
-        const presentesRecebidos = players
-            .filter(p => p.presentes && p.presentes.length > 0)
-            .map(p => ({ username: p.username, presentes: p.presentes }));
+        const player = players.find(p => p.username === username); // Encontra o jogador específico
 
-        return res.status(200).json({ presentesRecebidos });
+        if (!player) {
+            return res.status(404).json({ message: 'Jogador não encontrado.' });
+        }
+
+        const presentesRecebidos = player.presentes || []; // Pega os presentes recebidos do jogador
+
+        return res.status(200).json({ presentes: presentesRecebidos });
     });
 });
+;
+

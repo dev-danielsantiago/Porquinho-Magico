@@ -4,33 +4,31 @@
       "username": "Hsbiel",
       "senha": "Genki12345",
       "saldo": 50000,
-      "presentes": [
-        {
-          "tipo": "normal",
-          "valor": 10000,
-          "data": "2024-09-28T02:03:38.141Z"
-        }
-      ]
+      "presentes": []
     },
     {
       "username": "Viny001",
       "senha": "748489",
-      "saldo": 13501
+      "saldo": 13501,
+      "presentes": []
     },
     {
       "username": "Trazcks",
       "senha": "244466666",
-      "saldo": 12530
+      "saldo": 12530,
+      "presentes": []
     },
     {
       "username": "Necrolorde",
       "senha": "777",
-      "saldo": 1000
+      "saldo": 1000,
+      "presentes": []
     },
     {
       "username": "Cammy",
       "senha": "5550123",
-      "saldo": 11522
+      "saldo": 11522,
+      "presentes": []
     },
     {
       "username": "Number",
@@ -39,35 +37,38 @@
       "presentes": [
         {
           "tipo": "normal",
+          "item": "Espada de Ferro",
+          "descricao": "Causa 10 de dano em combate corpo a corpo.",
+          "tipoItem": "Arma",
+          "imagem": "img/espada_ferro.png",
           "valor": 10000,
-          "data": "2024-09-28T01:49:37.182Z"
-        },
-        {
-          "tipo": "normal",
-          "valor": 10000,
-          "data": "2024-09-28T01:57:10.889Z"
+          "data": "2024-09-28T02:40:23.183Z"
         }
       ]
     },
     {
       "username": "Mestre",
       "senha": "senhamestre",
-      "saldo": 11629895
+      "saldo": 11629895,
+      "presentes": []
     },
     {
       "username": "Crossroad",
       "senha": "123",
-      "saldo": 15590
+      "saldo": 15590,
+      "presentes": []
     },
     {
       "username": "mestre",
       "senha": "senhas",
-      "saldo": 11349548
+      "saldo": 11349548,
+      "presentes": []
     },
     {
       "username": "visita",
       "senha": "123",
-      "saldo": 9991500
+      "saldo": 9981500,
+      "presentes": []
     }
   ]
 }

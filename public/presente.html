@@ -1,74 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presentear Jogador</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        .caixa {
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            display: inline-block;
-            cursor: pointer;
-        }
-        .caixa.selected {
-            border-color: #f39c12;
-            background-color: #f9e79f;
-        }
-        #descricao {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        #saldo {
-            font-weight: bold;
-            color: green;
-            margin-bottom: 20px;
-        }
-        #resultadoEnvio {
-            margin-top: 20px;
-            font-weight: bold;
-            color: blue;
-        }
-        #resultadoEnvio img {
-            display: block;
-            margin: 10px auto;
-            max-width: 200px;
-        }
-        button {
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="presente.css">
 </head>
+
 <body>
     <h1>Presentear Jogador</h1>
-
+    <!-- Botão para voltar ao dashboard -->
+    <button onclick="window.location.href='dashboard.html'" id="voltar">Voltar</button>
     <!-- Exibir saldo atual -->
     <div id="saldo">Seu saldo atual: 0 Dracmas</div>
 
-    <!-- Botão para voltar ao dashboard -->
-    <button onclick="window.location.href='dashboard.html'">Voltar</button>
+
 
     <label for="jogadores">Escolha um jogador para presentear:</label>
     <select id="jogadores"></select>
 
     <h2>Escolha o tipo de caixa:</h2>
+    
     <div id="caixas">
-        <div class="caixa" data-tipo="normal" data-valor="10000" data-descricao="Uma caixa simples que contém um item comum.">Caixa Normal (10.000 Dracmas)</div>
-        <div class="caixa" data-tipo="superior" data-valor="100000" data-descricao="Uma caixa especial que pode conter itens raros.">Caixa Superior (100.000 Dracmas)</div>
-        <div class="caixa" data-tipo="lenda" data-valor="200000" data-descricao="Uma caixa lendária que contém itens poderosos e únicos.">Caixa Lenda (200.000 Dracmas)</div>
+        <div class="caixa" data-tipo="normal" data-valor="10000"
+            data-descricao="Uma caixa simples que contém um item comum.">Caixa Normal ($ 10K)</div>
+        <div class="caixa" data-tipo="superior" data-valor="100000"
+            data-descricao="Uma caixa especial que pode conter itens raros.">Caixa Superior ($ 100k)</div>
+        <div class="caixa" data-tipo="lenda" data-valor="200000"
+            data-descricao="Uma caixa lendária que contém itens poderosos e únicos.">Caixa Lenda ($ 200k)</div>
     </div>
 
     <div id="descricao"></div>
-    
+
     <button id="presentear">Presentear</button>
 
     <!-- Seção para exibir o resultado do envio do presente -->
     <div id="resultadoEnvio"></div>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             const username = localStorage.getItem('username');
 
             // Função para carregar o saldo atual do jogador
@@ -76,37 +48,37 @@
                 $.ajax({
                     url: `/saldo/${username}`,
                     method: 'GET',
-                    success: function(response) {
+                    success: function (response) {
                         if (response.success) {
                             $('#saldo').text(`Seu saldo atual: ${parseFloat(response.saldo).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`);
                         } else {
                             $('#saldo').text('Erro ao carregar saldo.');
                         }
                     },
-                    error: function() {
+                    error: function () {
                         $('#saldo').text('Erro ao carregar saldo.');
                     }
                 });
             }
 
             // Carregar os jogadores
-            $.getJSON('../data/players.json', function(data) {
-                data.jogadores.forEach(function(jogador) {
+            $.getJSON('../data/players.json', function (data) {
+                data.jogadores.forEach(function (jogador) {
                     $('#jogadores').append(`<option value="${jogador.username}">${jogador.username}</option>`);
                 });
-            }).fail(function() {
+            }).fail(function () {
                 alert('Erro ao carregar os jogadores.');
             });
 
             // Seleção da caixa
-            $('.caixa').on('click', function() {
+            $('.caixa').on('click', function () {
                 $('.caixa').removeClass('selected');
                 $(this).addClass('selected');
                 $('#descricao').text($(this).data('descricao'));
             });
 
             // Enviar presente
-            $('#presentear').on('click', function() {
+            $('#presentear').on('click', function () {
                 const destinatario = $('#jogadores').val();
                 const caixaSelecionada = $('.caixa.selected');
                 const tipoCaixa = caixaSelecionada.data('tipo');
@@ -127,7 +99,7 @@
                         tipoCaixa,
                         valor
                     }),
-                    success: function(response) {
+                    success: function (response) {
                         // Exibir o resultado do envio
                         $('#resultadoEnvio').html(`
                             <p>Presente enviado com sucesso!</p>
@@ -139,7 +111,7 @@
 
                         carregarSaldo(); // Atualizar o saldo após envio
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         alert(xhr.responseJSON.message);
                     }
                 });
@@ -150,4 +122,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -1,0 +1,127 @@
+/* Reset básico para margens e preenchimentos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8; /* Um fundo suave para melhorar a legibilidade */
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffeb3b; /* Amarelo claro */
+    padding: 15px 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 24px; /* Tamanho de fonte maior */
+}
+
+#voltarBtn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    padding: 8px 12px;
+    background-color: #ff6f61; /* Laranja */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 14px; /* Tamanho de fonte */
+}
+
+#voltarBtn:hover {
+    background-color: #ff4c3a; /* Vermelho mais forte */
+}
+
+#usuario {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 16px; /* Tamanho de fonte */
+}
+
+#presentesContainer {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 22px; /* Tamanho de fonte */
+    color: #555; /* Cinza escuro */
+}
+
+#listaPresentes {
+    list-style-type: none;
+    padding: 0;
+}
+
+#listaPresentes li {
+    background-color: #ffeeba; /* Amarelo suave */
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s; /* Transições suaves */
+}
+
+#listaPresentes li:hover {
+    transform: scale(1.02); /* Efeito de zoom */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra mais forte ao passar o mouse */
+}
+
+.item-img {
+    width: 60px; /* Aumenta a imagem */
+    height: 60px; /* Aumenta a imagem */
+    margin-right: 15px;
+    border-radius: 5px;
+    object-fit: cover; /* Cobre o espaço do contêiner */
+}
+
+.item-info {
+    flex-grow: 1; /* Permite que o item info ocupe o espaço restante */
+}
+
+small {
+    color: #666; /* Cinza para a data */
+}
+
+/* Estilização responsiva */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 20px; /* Reduz tamanho de fonte em dispositivos pequenos */
+    }
+
+    #voltarBtn {
+        padding: 6px 10px;
+        font-size: 12px; /* Tamanho de fonte menor */
+    }
+
+    #presentesContainer {
+        padding: 15px; /* Reduz o preenchimento */
+    }
+
+    h2 {
+        font-size: 18px; /* Tamanho de fonte menor */
+    }
+
+    .item-img {
+        width: 50px; /* Tamanho menor em celular */
+        height: 50px; /* Tamanho menor em celular */
+    }
+}
