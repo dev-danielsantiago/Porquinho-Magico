@@ -1,44 +1,55 @@
 {
-    "normal": [
+    "caixas": [
         {
-            "nome": "Espada Comum",
-            "descricao": "Uma espada comum, mas afiada.",
-            "imagem": "img/espada_comum.jpg",
-            "tipo": "arma"
+            "tipoCaixa": "normal",
+            "itens": [
+                {
+                    "nome": "Poção de Vida",
+                    "tipo": "Consumível",
+                    "descricao": "Restaura 50 pontos de vida.",
+                    "imagem": "img/pocao_vida.png"
+                },
+                {
+                    "nome": "Espada de Ferro",
+                    "tipo": "Arma",
+                    "descricao": "Causa 10 de dano em combate corpo a corpo.",
+                    "imagem": "img/espada_ferro.png"
+                }
+            ]
         },
         {
-            "nome": "Poção de Vida",
-            "descricao": "Restaura 50 de vida.",
-            "imagem": "img/poção_vida.jpg",
-            "tipo": "item"
-        }
-    ],
-    "superior": [
-        {
-            "nome": "Espada Mágica",
-            "descricao": "Uma espada que brilha com magia.",
-            "imagem": "img/espada_magica.jpg",
-            "tipo": "arma"
+            "tipoCaixa": "superior",
+            "itens": [
+                {
+                    "nome": "Armadura de Mithril",
+                    "tipo": "Armadura",
+                    "descricao": "Aumenta a defesa em 30 pontos.",
+                    "imagem": "img/armadura_mithril.png"
+                },
+                {
+                    "nome": "Anel de Regeneração",
+                    "tipo": "Item Mágico",
+                    "descricao": "Regenera 5 pontos de vida por turno.",
+                    "imagem": "img/anel_regeneracao.png"
+                }
+            ]
         },
         {
-            "nome": "Elixir da Sabedoria",
-            "descricao": "Aumenta o conhecimento do usuário.",
-            "imagem": "img/elixir_sabedoria.jpg",
-            "tipo": "item"
-        }
-    ],
-    "lenda": [
-        {
-            "nome": "Excalibur",
-            "descricao": "A famosa espada do rei Arthur.",
-            "imagem": "img/excalibur.jpg",
-            "tipo": "arma"
-        },
-        {
-            "nome": "Capa da Invisibilidade",
-            "descricao": "Torna o usuário invisível.",
-            "imagem": "img/capa_invisibilidade.jpg",
-            "tipo": "item"
+            "tipoCaixa": "lenda",
+            "itens": [
+                {
+                    "nome": "Espada Lendária",
+                    "tipo": "Arma",
+                    "descricao": "Causa 50 de dano em combate corpo a corpo.",
+                    "imagem": "img/espada_lendaria.png"
+                },
+                {
+                    "nome": "Escudo Divino",
+                    "tipo": "Armadura",
+                    "descricao": "Bloqueia 70% do dano recebido.",
+                    "imagem": "img/escudo_divino.png"
+                }
+            ]
         }
     ]
 }

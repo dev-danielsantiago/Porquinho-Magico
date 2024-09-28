@@ -163,6 +163,69 @@ tr:hover {
     padding: 10px 0;
 }
 
+#notificacoes {
+    position: relative;
+    cursor: pointer;
+}
+
+#notificacoesPresentes {
+    display: none;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+#notificacoesPresentes ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#notificacoesPresentes ul li {
+    background-color: #ffeeba;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#notificacoesPresentes ul li img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+#limparNotificacoes {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#limparNotificacoes:hover {
+    background-color: #ff4c3a;
+}
+
+#notificacoes.active {
+    color: orange; /* Muda a cor do sino */
+    animation: glow 1s infinite; /* Efeito de brilho */
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 8px orange; }
+    50% { text-shadow: 0 0 20px orange; }
+    100% { text-shadow: 0 0 5px orange; }
+}
+
 
 /* Responsivo */
 @media (max-width: 768px) {

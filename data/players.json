@@ -1,1 +1,73 @@
-{"jogadores":[{"username":"Hsbiel","senha":"Genki12345","saldo":50000},{"username":"Viny001","senha":"748489","saldo":13501},{"username":"Trazcks","senha":"244466666","saldo":12530},{"username":"Necrolorde","senha":"777","saldo":1000},{"username":"Cammy","senha":"5550123","saldo":11522},{"username":"Number","senha":"number123","saldo":4200},{"username":"Mestre","senha":"senhamestre","saldo":11629895},{"username":"Crossroad","senha":"123","saldo":15590},{"username":"mestre","senha":"senhas","saldo":11349548},{"username":"visita","senha":"123","saldo":10500}]}
+{
+  "jogadores": [
+    {
+      "username": "Hsbiel",
+      "senha": "Genki12345",
+      "saldo": 50000,
+      "presentes": [
+        {
+          "tipo": "normal",
+          "valor": 10000,
+          "data": "2024-09-28T02:03:38.141Z"
+        }
+      ]
+    },
+    {
+      "username": "Viny001",
+      "senha": "748489",
+      "saldo": 13501
+    },
+    {
+      "username": "Trazcks",
+      "senha": "244466666",
+      "saldo": 12530
+    },
+    {
+      "username": "Necrolorde",
+      "senha": "777",
+      "saldo": 1000
+    },
+    {
+      "username": "Cammy",
+      "senha": "5550123",
+      "saldo": 11522
+    },
+    {
+      "username": "Number",
+      "senha": "number123",
+      "saldo": 4200,
+      "presentes": [
+        {
+          "tipo": "normal",
+          "valor": 10000,
+          "data": "2024-09-28T01:49:37.182Z"
+        },
+        {
+          "tipo": "normal",
+          "valor": 10000,
+          "data": "2024-09-28T01:57:10.889Z"
+        }
+      ]
+    },
+    {
+      "username": "Mestre",
+      "senha": "senhamestre",
+      "saldo": 11629895
+    },
+    {
+      "username": "Crossroad",
+      "senha": "123",
+      "saldo": 15590
+    },
+    {
+      "username": "mestre",
+      "senha": "senhas",
+      "saldo": 11349548
+    },
+    {
+      "username": "visita",
+      "senha": "123",
+      "saldo": 9991500
+    }
+  ]
+}

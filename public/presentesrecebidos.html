@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentes Recebidos - Porquinho Mágico</title>
+    <link rel="stylesheet" href="presentesrecebidos.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        header ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        header ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        #listaPresentes {
+            padding: 20px;
+        }
+        #listaPresentes ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #listaPresentes ul li {
+            background-color: #ffeeba;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        #listaPresentes ul li img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Presentes Recebidos</h1>
+        <ul>
+            <li><a href="dashboard.html">Voltar</a></li>
+        </ul>
+    </header>
+
+    <div id="listaPresentes">
+        <h2>Seus Presentes</h2>
+        <ul id="presentes"></ul>
+    </div>
+
+    <script>
+        // Função para carregar os presentes recebidos
+        async function carregarPresentes() {
+            const username = localStorage.getItem('username'); // Obtém o nome do usuário
+
+            try {
+                const response = await fetch(`/presentes-recebidos/${username}`); // API para obter presentes recebidos
+                const data = await response.json();
+
+                if (data.presentesRecebidos) {
+                    const listaPresentes = document.getElementById('presentes');
+                    listaPresentes.innerHTML = ''; // Limpa a lista
+
+                    data.presentesRecebidos.forEach(presente => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                            <img src="${presente.imagem}" alt="${presente.item}">
+                            <div>
+                                <strong>${presente.item}</strong> <br>
+                                <em>${presente.tipoItem}</em> <br>
+                                ${presente.descricao} <br>
+                                Tipo da caixa: ${presente.tipo}
+                            </div>
+                        `;
+                        listaPresentes.appendChild(listItem);
+                    });
+                } else {
+                    document.getElementById('presentes').innerHTML = '<li>Nenhum presente recebido.</li>';
+                }
+            } catch (error) {
+                console.error('Erro ao carregar presentes recebidos:', error);
+            }
+        }
+
+        // Carrega os presentes ao iniciar a página
+        window.onload = carregarPresentes;
+    </script>
+</body>
+</html>

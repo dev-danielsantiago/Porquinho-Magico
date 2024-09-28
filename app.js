@@ -1,11 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const path = require('path');
 const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
-app.use(express.static('public')); // Para servir arquivos estáticos
+app.use(express.static('public'));
+app.use('/data', express.static(path.join(__dirname, 'data')));
 
 // Middleware para definir a política de segurança de conteúdo
 app.use((req, res, next) => {
@@ -19,14 +21,14 @@ app.listen(port, () => {
 
 // Rota para a página de login
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/login.html');
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
 // Rota para login
 app.post('/login', (req, res) => {
     const { username, senha } = req.body;
 
-    fs.readFile('data/players.json', 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, 'data', 'players.json'), 'utf8', (err, data) => {
         if (err) {
             return res.status(500).json({ message: 'Erro ao ler os dados.' });
         }
@@ -49,149 +51,42 @@ app.post('/login', (req, res) => {
 app.post('/transfer', (req, res) => {
     const { destinatario, valor, username } = req.body;
 
-    fs.readFile('data/players.json', 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, 'data', 'players.json'), 'utf8', (err, data) => {
         if (err) {
             return res.status(500).json({ message: 'Erro ao ler os dados.' });
         }
 
         const players = JSON.parse(data).jogadores;
-        const jogadorOrigem = players.find(p => p.username === username);
-        const jogadorDestino = players.find(p => p.username === destinatario);
+        const player = players.find(p => p.username === username);
+        const recipient = players.find(p => p.username === destinatario);
 
-        if (!jogadorOrigem || !jogadorDestino) {
-            return res.status(404).json({ message: 'Jogador origem ou destinatário não encontrado.' });
-        }
+        if (player && recipient) {
+            if (player.saldo >= valor) {
+                player.saldo -= valor;
+                recipient.saldo += valor;
 
-        const valorNumerico = Number(valor);
-        if (isNaN(valorNumerico) || valorNumerico <= 0) {
-            return res.status(400).json({ message: 'Valor inválido.' });
-        }
-
-        // Verifica se o jogador está tentando transferir para si mesmo
-        if (jogadorOrigem.username === jogadorDestino.username) {
-            return res.status(400).json({ message: 'Você não pode transferir dinheiro para si mesmo.' });
-        }
-
-        // Verifica se o saldo do jogador de origem é suficiente
-        if (jogadorOrigem.saldo < valorNumerico) {
-            return res.status(400).json({ message: 'Saldo insuficiente para a transferência.' });
-        }
-
-        // Realizar a transferência
-        jogadorOrigem.saldo -= valorNumerico;
-        jogadorDestino.saldo += valorNumerico;
-
-        // Atualizar o arquivo JSON
-        fs.writeFile('data/players.json', JSON.stringify({ jogadores: players }), (err) => {
-            if (err) {
-                return res.status(500).json({ message: 'Erro ao atualizar os dados.' });
+                fs.writeFile(path.join(__dirname, 'data', 'players.json'), JSON.stringify({ jogadores: players }, null, 2), (err) => {
+                    if (err) {
+                        return res.status(500).json({ message: 'Erro ao salvar os dados.' });
+                    }
+                    return res.status(200).json({ message: 'Transferência realizada com sucesso.' });
+                });
+            } else {
+                return res.status(400).json({ message: 'Saldo insuficiente.' });
             }
-
-            // Registrar a transação após a atualização
-            registrarTransacao(jogadorOrigem.username, jogadorDestino.username, valorNumerico, res);
-        });
-    });
-});
-
-// Função para registrar transações
-function registrarTransacao(remetente, destinatario, valor, res) {
-    fs.readFile('data/transacoes.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ message: 'Erro ao ler os dados das transações.' });
-        }
-
-        const transacoes = JSON.parse(data || '{"transacoes": []}').transacoes;
-        transacoes.push({ remetente, destinatario, valor: Number(valor), data: new Date().toISOString() });
-
-        fs.writeFile('data/transacoes.json', JSON.stringify({ transacoes }), (err) => {
-            if (err) {
-                return res.status(500).json({ message: 'Erro ao atualizar os dados das transações.' });
-            }
-
-            // Mensagem com quebra de linha
-            return res.status(200).json({ message: '<br> Transferência e transação com sucesso!💸' });
-        });
-    });
-}
-
-// Rota para visualizar todos os jogadores e seus saldos
-app.get('/saldo-jogadores', (req, res) => {
-    fs.readFile('data/players.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ message: 'Erro ao ler os dados.' });
-        }
-
-        const players = JSON.parse(data).jogadores;
-        return res.status(200).json(players);
-    });
-});
-
-// Rota para o dashboard do mestre
-app.get('/dashboard-mestre', (req, res) => {
-    res.sendFile(__dirname + '/public/mestre.html');
-});
-
-// Rota para modificar o saldo
-app.post('/modificar-saldo', (req, res) => {
-    const { jogador, valor, acao } = req.body;  // Mudança aqui para capturar 'acao'
-
-    fs.readFile('data/players.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ message: 'Erro ao ler os dados.' });
-        }
-
-        const players = JSON.parse(data).jogadores;
-        const jogadorEncontrado = players.find(p => p.username === jogador);
-
-        if (!jogadorEncontrado) {
+        } else {
             return res.status(404).json({ message: 'Jogador não encontrado.' });
         }
-
-        const valorNumerico = Number(valor);
-        if (isNaN(valorNumerico)) {
-            return res.status(400).json({ message: 'Valor inválido.' });
-        }
-
-        // Verifica a ação (aumentar ou diminuir) e modifica o saldo
-        if (acao === 'aumentar') {
-            jogadorEncontrado.saldo += valorNumerico;
-        } else if (acao === 'diminuir') {
-            // Permite que o saldo fique negativo
-            jogadorEncontrado.saldo -= valorNumerico;
-        } else {
-            return res.status(400).json({ message: 'Ação inválida.' });
-        }
-
-        // Atualizar o arquivo JSON com o novo saldo
-        fs.writeFile('data/players.json', JSON.stringify({ jogadores: players }), (err) => {
-            if (err) {
-                return res.status(500).json({ message: 'Erro ao atualizar os dados.' });
-            }
-
-            return res.status(200).json({ message: 'Saldo modificado com sucesso!', saldo: jogadorEncontrado.saldo });
-        });
     });
 });
 
-// Rota para obter transações
-app.get('/transacoes', (req, res) => {
-    fs.readFile('data/transacoes.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ message: 'Erro ao ler os dados das transações.' });
-        }
-
-        const transacoes = JSON.parse(data || '{"transacoes": []}').transacoes;
-        return res.status(200).json(transacoes);
-    });
-});
-
-// Rota para obter o saldo de um jogador específico
+// Rota para obter o saldo do jogador
 app.get('/saldo/:username', (req, res) => {
     const username = req.params.username;
 
-    fs.readFile('data/players.json', 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, 'data', 'players.json'), 'utf8', (err, data) => {
         if (err) {
-            return res.status(500).json({ message: 'Erro ao ler os dados.' });
+            return res.status(500).json({ success: false, message: 'Erro ao ler os dados dos jogadores.' });
         }
 
         const players = JSON.parse(data).jogadores;
@@ -200,63 +95,208 @@ app.get('/saldo/:username', (req, res) => {
         if (player) {
             return res.status(200).json({ success: true, saldo: player.saldo });
         } else {
-            return res.status(404).json({ success: false, message: 'Usuário não encontrado.' });
+            return res.status(404).json({ success: false, message: 'Jogador não encontrado.' });
         }
     });
 });
 
-// Rota para apostas do Jokenpo
-app.post('/apostar', async (req, res) => {
-    const { username, valorAposta, jogada, jogadaComputador, resultado } = req.body;
+// Rota para o dashboard do mestre
+app.get('/dashboard-mestre', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'mestre.html'));
+});
 
-    try {
-        // Carregar dados dos jogadores
-        const data = await fs.promises.readFile('data/players.json', 'utf8');
+// Rota para obter a lista de jogadores e seus saldos (para o painel mestre)
+app.get('/saldo-jogadores', (req, res) => {
+    fs.readFile(path.join(__dirname, 'data', 'players.json'), 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Erro ao ler os dados dos jogadores.' });
+        }
+
         const players = JSON.parse(data).jogadores;
-        const player = players.find(p => p.username === username);
-        const mestre = players.find(p => p.username === 'Mestre');
+        return res.status(200).json({ success: true, jogadores: players });
+    });
+});
 
-        if (!player || !mestre) {
-            return res.status(404).json({ success: false, message: 'Usuário ou mestre não encontrado.' });
+// Rota para o jogo de Jokenpo (Aposta)
+app.post('/apostar', (req, res) => {
+    const { jogador, valorApostado, escolhaJogador } = req.body;
+
+    const opcoes = ['pedra', 'papel', 'tesoura'];
+    const escolhaServidor = opcoes[Math.floor(Math.random() * opcoes.length)];
+
+    const determinarVencedor = (jogadorEscolha, servidorEscolha) => {
+        if (jogadorEscolha === servidorEscolha) return 'empate';
+        if (
+            (jogadorEscolha === 'pedra' && servidorEscolha === 'tesoura') ||
+            (jogadorEscolha === 'papel' && servidorEscolha === 'pedra') ||
+            (jogadorEscolha === 'tesoura' && servidorEscolha === 'papel')
+        ) {
+            return 'jogador';
+        }
+        return 'servidor';
+    };
+
+    const resultado = determinarVencedor(escolhaJogador, escolhaServidor);
+
+    fs.readFile(path.join(__dirname, 'data', 'players.json'), 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).json({ message: 'Erro ao ler os dados dos jogadores.' });
         }
 
-        const valorApostaNumerico = Number(valorAposta);
-        if (isNaN(valorApostaNumerico) || valorApostaNumerico <= 0) {
-            return res.status(400).json({ success: false, message: 'Valor de aposta inválido.' });
+        const players = JSON.parse(data).jogadores;
+        const player = players.find(p => p.username === jogador);
+
+        if (!player) {
+            return res.status(404).json({ message: 'Jogador não encontrado.' });
         }
 
-        // Verifica se o saldo do jogador é suficiente
-        if (player.saldo < valorApostaNumerico) {
-            return res.status(400).json({ success: false, message: 'Saldo insuficiente para a aposta.' });
-        }
+        let mensagem;
+        let ganho = 0;
 
-        // Processa a aposta e atualiza os saldos
-        if (resultado === 'ganhou') {
-            const valorGanho = valorApostaNumerico * 7;
-            player.saldo += valorGanho; // O jogador ganha 7x o valor apostado
-            mestre.saldo -= valorGanho; // O "Mestre" perde
-        } else if (resultado === 'perdeu') {
-            const valorPerdido = valorApostaNumerico * 2;
-            player.saldo -= valorPerdido; // O jogador perde 2x o valor apostado
-            mestre.saldo += valorPerdido; // O "Mestre" ganha
+        if (resultado === 'jogador') {
+            ganho = valorApostado * 7;
+            player.saldo += ganho;
+            mensagem = `Parabéns, você ganhou ${ganho}! Sua escolha: ${escolhaJogador}, Escolha do servidor: ${escolhaServidor}`;
+        } else if (resultado === 'servidor') {
+            ganho = -valorApostado * 2;
+            player.saldo += ganho;
+            mensagem = `Você perdeu ${-ganho}! Sua escolha: ${escolhaJogador}, Escolha do servidor: ${escolhaServidor}`;
         } else {
-            return res.status(400).json({ success: false, message: 'Resultado inválido.' });
+            mensagem = `Empate! Ambos escolheram: ${escolhaJogador}`;
         }
 
-        // Atualiza o arquivo JSON
-        await fs.promises.writeFile('data/players.json', JSON.stringify({ jogadores: players }));
+        fs.writeFile(path.join(__dirname, 'data', 'players.json'), JSON.stringify({ jogadores: players }, null, 2), (err) => {
+            if (err) {
+                return res.status(500).json({ message: 'Erro ao salvar os dados.' });
+            }
 
-        // Resposta com jogadas e saldo atualizado
-        return res.status(200).json({
-            success: true,
-            message: 'Aposta processada com sucesso!',
-            saldo: player.saldo,
-            jogadaJogador: jogada,
-            jogadaPorquinho: jogadaComputador,
-            resultado: resultado === 'ganhou' ? 'Você ganhou!' : 'Você perdeu!'
+            return res.status(200).json({
+                mensagem,
+                escolhaServidor,
+                escolhaJogador,
+                resultado,
+                novoSaldo: player.saldo
+            });
         });
-    } catch (error) {
-        console.error('Erro ao processar a aposta:', error);
-        return res.status(500).json({ success: false, message: 'Erro ao processar a aposta.' });
-    }
+    });
+});
+
+// Rota para modificar o saldo de um jogador (usada pelo mestre)
+app.post('/modificar-saldo', (req, res) => {
+    const { jogador, valor, acao } = req.body;
+
+    fs.readFile(path.join(__dirname, 'data', 'players.json'), 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).json({ message: 'Erro ao ler os dados dos jogadores.' });
+        }
+
+        const players = JSON.parse(data).jogadores;
+        const player = players.find(p => p.username === jogador);
+
+        if (!player) {
+            return res.status(404).json({ message: 'Jogador não encontrado.' });
+        }
+
+        if (acao === 'aumentar') {
+            player.saldo += parseFloat(valor);
+        } else if (acao === 'diminuir') {
+            player.saldo -= parseFloat(valor);
+        } else {
+            return res.status(400).json({ message: 'Ação inválida.' });
+        }
+
+        fs.writeFile(path.join(__dirname, 'data', 'players.json'), JSON.stringify({ jogadores: players }, null, 2), (err) => {
+            if (err) {
+                return res.status(500).json({ message: 'Erro ao salvar os dados.' });
+            }
+
+            return res.status(200).json({ message: 'Saldo modificado com sucesso!', saldoAtual: player.saldo });
+        });
+    });
+});
+
+// Rota para enviar presente de um jogador para outro
+app.post('/presentear', (req, res) => {
+    const { remetente, destinatario, tipoCaixa, valor } = req.body;
+
+    fs.readFile(path.join(__dirname, 'data', 'players.json'), 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).json({ message: 'Erro ao ler os dados dos jogadores.' });
+        }
+
+        const players = JSON.parse(data).jogadores;
+        const playerRemetente = players.find(p => p.username === remetente);
+        const playerDestinatario = players.find(p => p.username === destinatario);
+
+        if (!playerRemetente || !playerDestinatario) {
+            return res.status(404).json({ message: 'Jogador não encontrado.' });
+        }
+
+        if (playerRemetente.saldo < valor) {
+            return res.status(400).json({ message: 'Saldo insuficiente para enviar o presente.' });
+        }
+
+        playerRemetente.saldo -= valor;
+
+        fs.readFile(path.join(__dirname, 'data', 'itens.json'), 'utf8', (err, itensData) => {
+            if (err) {
+                return res.status(500).json({ message: 'Erro ao ler os itens.' });
+            }
+
+            const caixas = JSON.parse(itensData).caixas;
+            const caixaSelecionada = caixas.find(caixa => caixa.tipoCaixa === tipoCaixa);
+
+            if (!caixaSelecionada) {
+                return res.status(404).json({ message: 'Tipo de caixa não encontrado.' });
+            }
+
+            const itemAleatorio = caixaSelecionada.itens[Math.floor(Math.random() * caixaSelecionada.itens.length)];
+
+            if (!playerDestinatario.presentes) {
+                playerDestinatario.presentes = [];
+            }
+            playerDestinatario.presentes.push({
+                tipo: tipoCaixa,
+                item: itemAleatorio.nome,
+                descricao: itemAleatorio.descricao,
+                tipoItem: itemAleatorio.tipo,
+                imagem: itemAleatorio.imagem,
+                valor,
+                data: new Date()
+            });
+
+            fs.writeFile(path.join(__dirname, 'data', 'players.json'), JSON.stringify({ jogadores: players }, null, 2), (err) => {
+                if (err) {
+                    return res.status(500).json({ message: 'Erro ao salvar os dados.' });
+                }
+
+                return res.status(200).json({
+                    message: `Presente do tipo ${tipoCaixa} enviado com sucesso!`,
+                    itemNome: itemAleatorio.nome,
+                    tipoItem: itemAleatorio.tipo,
+                    descricao: itemAleatorio.descricao,
+                    imagem: itemAleatorio.imagem,
+                    tipoCaixa,
+                    valor,
+                    data: new Date()
+                });
+            });
+        });
+    });
+});
+
+// Rota para o mestre visualizar quem recebeu presentes
+app.get('/presentes-recebidos', (req, res) => {
+    fs.readFile(path.join(__dirname, 'data', 'players.json'), 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).json({ message: 'Erro ao ler os dados dos jogadores.' });
+        }
+
+        const players = JSON.parse(data).jogadores;
+        const presentesRecebidos = players
+            .filter(p => p.presentes && p.presentes.length > 0)
+            .map(p => ({ username: p.username, presentes: p.presentes }));
+
+        return res.status(200).json({ presentesRecebidos });
+    });
 });

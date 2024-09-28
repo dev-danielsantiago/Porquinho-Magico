@@ -3,186 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="dashboard.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="img/porquinho (1).png" type="image/x-icon">
-    
     <title>Dashboard - Porquinho Mágico</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+       
+    </style>
 </head>
 <body>
     <header>
-        
-            <h1>Porquinho</h1>
-
-            <ul>
-                
-                <li><a href="jokenpo.html">✌️Jokenpo✊</a></li>
-            </ul>
-        
+        <h1>Porquinho Mágico</h1>
+        <ul>
+            <li><a href="jokenpo.html">✌️Jokenpo✊</a></li>
+            <li><a href="presente.html">Presentear</a></li>
+            <li id="notificacoes">🔔 <span class="badge"></span></li>
+        </ul>
     </header>
-    
-    <h2>Sua conta Bancária</h2>    
-    <img src="img/poupanca.png" alt="">
-    
+
+    <!-- Seção de notificações -->
+    <div id="notificacoesPresentes">
+        <h2>Notificações</h2>
+        <ul id="listaPresentes"></ul>
+        <button id="limparNotificacoes">Limpar Notificações</button>
+    </div>
+
+    <h2>Sua Conta Bancária</h2>
+    <img src="img/poupanca.png" alt="Imagem de poupança" width="300px">
     <div id="usuario"></div> <!-- Mensagem de boas-vindas -->
     <div id="saldoContainer">
         <h2>Seu Saldo</h2>
         <div id="saldo"></div>
     </div>
+
     <div id="transferMsg" class="error"></div>
-<h2>Transferir Dinheiro</h2>
-    
+    <h2>Transferir Dinheiro</h2>
     <form id="transferForm">
-        
         <label for="destinatario">Destinatário:</label>
-        <select id="destinatario" name="destinatario" required>
-            <!-- Jogadores serão carregados aqui -->
-        </select>
+        <select id="destinatario" name="destinatario" required></select>
 
         <label for="valor">Valor:</label>
         <input type="number" id="valor" name="valor" required>
         <button type="submit">Transferir</button>
     </form>
-    
-
-<!--  <h2>Transações</h2>
-    <table border="1" id="tabela-transacoes">
-        <tr>
-            <th>Tipo</th>
-            <th>Remetente</th>
-            <th>Destinatário</th>
-            <th>Valor</th>
-            <th>Data</th>
-        </tr>
-    </table> -->
 
     <script>
-        // Mostrar nome do usuário
-        const username = localStorage.getItem('username');
-        document.getElementById('usuario').innerText = `Bem-vindo, ${username}!`;
-
-        // Função para atualizar o saldo do jogador
-        async function atualizarSaldo() {
-            try {
-                const response = await fetch(`/saldo/${username}`);
-                const data = await response.json();
-
-                if (data.success) {
-                    const saldoAtualizado = parseFloat(data.saldo).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-                    document.getElementById('saldo').innerText = `Dracmas: $ ${saldoAtualizado}`;
-                } else {
-                    console.error('Erro ao buscar saldo atualizado:', data.message);
-                }
-            } catch (error) {
-                console.error('Erro ao atualizar saldo:', error);
-            }
-        }
-
-        // Mostrar saldo formatado ao carregar a página
-        atualizarSaldo();
-
+        // Função para carregar os jogadores no seletor de destinatário
         async function carregarJogadores() {
             try {
                 const response = await fetch('/saldo-jogadores');
-                const jogadores = await response.json();
+                const data = await response.json();
 
-                const destinatarioSelect = document.getElementById('destinatario');
-                jogadores.forEach(jogador => {
-                    const option = document.createElement('option');
-                    option.value = jogador.username;
-                    option.textContent = jogador.username;
-                    destinatarioSelect.appendChild(option);
-                });
+                if (data.success) {
+                    const jogadores = data.jogadores;
+                    const destinatarioSelect = document.getElementById('destinatario');
+                    destinatarioSelect.innerHTML = '';
+
+                    jogadores.forEach(jogador => {
+                        const option = document.createElement('option');
+                        option.value = jogador.username;
+                        option.textContent = jogador.username;
+                        destinatarioSelect.appendChild(option);
+                    });
+                } else {
+                    console.error('Erro ao carregar jogadores:', data.message);
+                }
             } catch (error) {
                 console.error('Erro ao carregar jogadores:', error);
             }
         }
 
-        document.getElementById('transferForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const destinatario = document.getElementById('destinatario').value;
-            const valor = document.getElementById('valor').value;
-
+        // Função para carregar o saldo do jogador
+        async function carregarSaldo() {
+            const username = localStorage.getItem('username');
             try {
-                const response = await fetch(`/transfer`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ destinatario, valor, username })
-                });
+                const response = await fetch(`/saldo/${username}`);
+                const data = await response.json();
 
-                const result = await response.json();
-                document.getElementById('transferMsg').innerText = result.message;
-
-                if (response.ok) {
-                    // Adiciona classe de sucesso
-                    document.getElementById('transferMsg').className = 'success';
-
-                    // Registrar a transação
-                    await fetch('/registrar-transacao', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ remetente: username, destinatario, valor })
-                    });
-
-                    // Atualizar o saldo do jogador
-                    await atualizarSaldo();
-
-                    // Atualizar as transações
-                    await carregarTransacoes();
+                if (data.success) {
+                    const saldoElement = document.getElementById('saldo');
+                    saldoElement.textContent = parseFloat(data.saldo).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 } else {
-                    // Adiciona classe de erro
-                    document.getElementById('transferMsg').className = 'error';
+                    console.error('Erro ao carregar saldo:', data.message);
                 }
             } catch (error) {
-                console.error('Erro ao realizar transferência:', error);
-            }
-        });
-
-        // Função para carregar transações
-        async function carregarTransacoes() {
-            try {
-                const response = await fetch('/transacoes');
-                const transacoes = await response.json();
-                const tabela = document.getElementById('tabela-transacoes');
-
-                tabela.innerHTML = `
-                    <tr>
-                        <th>Tipo</th>
-                        <th>Remetente</th>
-                        <th>Destinatário</th>
-                        <th>Valor</th>
-                        <th>Data</th>
-                    </tr>
-                `; // Limpa e recria o cabeçalho da tabela
-
-                transacoes.forEach(transacao => {
-                    const row = tabela.insertRow();
-                    const tipo = transacao.remetente === username ? 'Enviado' : 'Recebido';
-                    row.insertCell(0).innerText = tipo;
-                    row.insertCell(1).innerText = transacao.remetente;
-                    row.insertCell(2).innerText = transacao.destinatario;
-                    const valorFormatado = parseFloat(transacao.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-                    row.insertCell(3).innerText = `$ ${valorFormatado}`;
-                    row.insertCell(4).innerText = new Date(transacao.data).toLocaleString('pt-BR');
-                });
-            } catch (error) {
-                console.error('Erro ao carregar transações:', error);
+                console.error('Erro ao carregar saldo:', error);
             }
         }
 
-        // Carregar jogadores e transações ao iniciar a página
-        window.onload = async () => {
-            await carregarJogadores();
-            await carregarTransacoes();
-        };
+        // Função para carregar notificações de presentes
+        async function carregarNotificacoes() {
+            const username = localStorage.getItem('username');
+            try {
+                const response = await fetch('/presentes-recebidos');
+                const data = await response.json();
+
+                const listaPresentes = document.getElementById('listaPresentes');
+                listaPresentes.innerHTML = ''; // Limpa a lista
+
+                if (data.presentesRecebidos) {
+                    const jogadorPresentes = data.presentesRecebidos.find(jogador => jogador.username === username);
+                    if (jogadorPresentes && jogadorPresentes.presentes.length > 0) {
+                        jogadorPresentes.presentes.forEach(presente => {
+                            const listItem = document.createElement('li');
+                            listItem.innerHTML = `
+                                <img src="${presente.imagem}" alt="${presente.item}">
+                                <div>
+                                    <strong>${presente.item}</strong> <br>
+                                    <em>${presente.tipoItem}</em> <br>
+                                    ${presente.descricao} <br>
+                                    Tipo da caixa: ${presente.tipo}
+                                </div>
+                            `;
+                            listaPresentes.appendChild(listItem);
+                        });
+
+                        // Adiciona a classe ativa ao sino
+                        document.getElementById('notificacoes').classList.add('active');
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao carregar notificações de presentes:', error);
+            }
+        }
+
+        // Função para limpar notificações
+        function limparNotificacoes() {
+            const listaPresentes = document.getElementById('listaPresentes');
+            listaPresentes.innerHTML = ''; // Limpa a lista de notificações
+            document.querySelector('#notificacoes .badge').style.display = 'none'; // Remove a bolinha vermelha
+            document.getElementById('notificacoesPresentes').style.display = 'none'; // Fecha a área de notificações
+            document.getElementById('notificacoes').classList.remove('active'); // Remove destaque do sino
+        }
+
+        // Alterna a exibição da área de notificações
+        document.getElementById('notificacoes').addEventListener('click', (event) => {
+            const notificacoesDiv = document.getElementById('notificacoesPresentes');
+            notificacoesDiv.style.display = (notificacoesDiv.style.display === 'block') ? 'none' : 'block';
+            event.stopPropagation(); // Evita que o clique feche a notificação
+        });
+
+        // Função para fechar notificações ao clicar fora da área
+        document.addEventListener('click', (event) => {
+            const notificacoesDiv = document.getElementById('notificacoesPresentes');
+            if (!notificacoesDiv.contains(event.target) && notificacoesDiv.style.display === 'block') {
+                notificacoesDiv.style.display = 'none';
+            }
+        });
+
+        // Botão para limpar notificações
+        document.getElementById('limparNotificacoes').addEventListener('click', limparNotificacoes);
+
+        // Evento de submissão do formulário de transferência
+        document.getElementById('transferForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const username = localStorage.getItem('username');
+            const destinatario = document.getElementById('destinatario').value;
+            const valor = parseFloat(document.getElementById('valor').value);
+
+            try {
+                const response = await fetch('/transfer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, destinatario, valor }),
+                });
+
+                const data = await response.json();
+                if (data.message) {
+                    alert(data.message);
+                }
+                carregarSaldo(); // Atualiza o saldo após a transferência
+            } catch (error) {
+                console.error('Erro ao transferir:', error);
+            }
+        });
+
+        // Chama as funções quando a página for carregada
+        window.onload = async function () {
+            const username = localStorage.getItem('username');
+            document.getElementById('usuario').textContent = `Bem-vindo, ${username}!`;
+
+            await carregarJogadores(); // Carrega a lista de jogadores
+            await carregarSaldo(); // Carrega o saldo do jogador
+            await carregarNotificacoes(); // Carrega as notificações de presentes
+        }
     </script>
 </body>
 </html>
