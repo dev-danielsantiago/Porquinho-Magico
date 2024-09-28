@@ -1,0 +1,85 @@
+{
+    "itens": [
+      {
+        "item": "Blackvsm",
+        "nivel": "Comum",
+        "dano": "1d4",
+        "durabilidade": 100,
+        "descricao": "Uma arma simples e eficiente, amplamente usada por guerreiros iniciantes em combates rápidos.",
+        "imagem": "blackvsm.png"
+      },
+      {
+        "item": "[Nome não especificado]",
+        "nivel": "Comum",
+        "dano": "1d6",
+        "durabilidade": 100,
+        "descricao": "Este item oferece um equilíbrio entre durabilidade e poder de ataque, adequado para combates corpo a corpo em diversas situações.",
+        "imagem": "comum_item.png"
+      },
+      {
+        "item": "[Nome não especificado]",
+        "nivel": "Raro",
+        "dano": "1d12",
+        "durabilidade": 100,
+        "descricao": "Uma arma poderosa com espaço para uma runa, tornando-a ideal para guerreiros que buscam personalizar suas armas com encantamentos.",
+        "imagem": "raro_item.png"
+      },
+      {
+        "item": "Katanas Fukku Jemini no Yūgure",
+        "nivel": "Épico",
+        "dano": "2d8 (corte)",
+        "durabilidade": 444,
+        "descricao": "Forjadas com o poder da Lua, estas katanas concedem habilidades únicas ao portador durante as fases lunares, aumentando o dano e a chance de crítico à noite. Elas também permitem alternar entre estilos de combate com facilidade, tornando-se armas versáteis e letais.",
+        "imagem": "katanas_fukku.png"
+      },
+      {
+        "item": "Katana do Vento Cortante",
+        "nivel": "Raro",
+        "dano": "1d8 (corte) + 1d8 (mágico)",
+        "durabilidade": 10,
+        "descricao": "Esta katana, feita a partir dos ventos, oferece um corte preciso e mágico. Ela permite ao usuário conjurar uma lufada de vento duas vezes por dia, ideal para manipular o campo de batalha e dispersar inimigos.",
+        "imagem": "katana_vento_cortante.png"
+      },
+      {
+        "item": "Wakizashi da Reflexão",
+        "nivel": "Épico",
+        "dano": "1d6 (corte) + 1d6 (mágico)",
+        "durabilidade": 15,
+        "descricao": "Uma wakizashi mágica capaz de refletir magias uma vez por dia e conceder proteção extra ao usuário, aumentando sua Classe de Armadura.",
+        "imagem": "wakizashi_reflexao.png"
+      },
+      {
+        "item": "Wakizashi da Serenidade",
+        "nivel": "Raro",
+        "dano": "1d6 (corte)",
+        "durabilidade": 15,
+        "descricao": "Esta wakizashi emana uma aura de calma e concede resistência contra efeitos mentais e emocionais. O usuário também pode lançar 'Acalmar Emoções' uma vez por dia.",
+        "imagem": "wakizashi_serenidade.png"
+      },
+      {
+        "item": "Naginata da Força Espiritual",
+        "nivel": "Épico",
+        "dano": "1d10 (corte)",
+        "durabilidade": 20,
+        "descricao": "Esta naginata amplifica o poder espiritual do usuário, aumentando o dano e a precisão conforme almas são consumidas. Permite conjurar 'Arma Espiritual' uma vez por dia.",
+        "imagem": "naginata_forca_espiritual.png"
+      },
+      {
+        "item": "Yari da Transparência",
+        "nivel": "Raro",
+        "dano": "1d8 (perfuração)",
+        "durabilidade": 15,
+        "descricao": "Uma lança mágica que permite ao usuário lançar 'Invisibilidade' em si mesmo uma vez por dia. Quando invisível, a arma aumenta a chance de acerto crítico.",
+        "imagem": "yari_transparencia.png"
+      },
+      {
+        "item": "Kusanagi-no-Tsurugi (A Espada da Serpente Cortante)",
+        "nivel": "Lendário",
+        "dano": "2d8 (perfuração)",
+        "durabilidade": "Indestrutível",
+        "descricao": "Uma espada lendária que concede bônus em todos os ataques e permite conjurar 'Serpente de Fogo' uma vez por dia. A lâmina é indestrutível e se repara sozinha durante descansos longos.",
+        "imagem": "kusanagi_no_tsurugi.png"
+      }
+    ]
+  }
+  

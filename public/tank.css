@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #4A4A4A;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+#usuario {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+#listaItens {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+}
+
+.item-card {
+    background-color: white;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    transition: transform 0.2s;
+}
+
+.item-card:hover {
+    transform: scale(1.05);
+}
+
+.item-image {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.item-details {
+    margin-top: 10px;
+}
+
+.item-details strong {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.item-details p {
+    margin: 5px 0;
+}

@@ -309,3 +309,34 @@ app.get('/presentes-recebidos/:username', (req, res) => {
 });
 ;
 
+// Rota para comprar itens
+app.post('/comprar', (req, res) => {
+    const { username, item, preco } = req.body;
+
+    fs.readFile(path.join(__dirname, 'data', 'players.json'), 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).json({ message: 'Erro ao ler os dados dos jogadores.' });
+        }
+
+        const players = JSON.parse(data).jogadores;
+        const player = players.find(p => p.username === username);
+
+        if (!player) {
+            return res.status(404).json({ message: 'Jogador não encontrado.' });
+        }
+
+        if (player.saldo < preco) {
+            return res.status(400).json({ message: 'Saldo insuficiente para comprar o item.' });
+        }
+
+        player.saldo -= preco; // Deduz o preço do item do saldo
+
+        fs.writeFile(path.join(__dirname, 'data', 'players.json'), JSON.stringify({ jogadores: players }, null, 2), (err) => {
+            if (err) {
+                return res.status(500).json({ message: 'Erro ao salvar os dados.' });
+            }
+
+            return res.status(200).json({ message: `Você comprou ${item} por ${preco} Dracmas com sucesso!` });
+        });
+    });
+});

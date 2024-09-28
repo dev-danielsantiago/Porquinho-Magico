@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Necromante - Porquinho Mágico</title>
+    <link rel="stylesheet" href="loja.css">
+    <style>
+        #usuario {
+            margin-bottom: 20px;
+        }
+        .item-card {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .item-image {
+            max-width: 100px;
+        }
+        .comprar-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .comprar-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Itens do Necromante</h1>
+        <a href="dashboard.html">Voltar</a>
+    </header>
+
+    <div id="usuario"></div>
+    <div id="listaNecromante"></div>
+
+    <script>
+        async function carregarNecromante() {
+            try {
+                const response = await fetch('/data/necromante.json');
+                const data = await response.json();
+                const listaNecromante = document.getElementById('listaNecromante');
+                listaNecromante.innerHTML = '';
+                data.itens.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'item-card';
+                    card.innerHTML = `
+                        <img src="${item.imagem}" alt="${item.nome}" class="item-image">
+                        <div class="item-details">
+                            <strong>${item.nome}</strong>
+                            <p>Preço: ${item.valor} Dracmas</p>
+                            <p>${item.descricao}</p>
+                            <button class="comprar-button" onclick="comprarItem(${item.valor})">Comprar</button>
+                        </div>
+                    `;
+                    listaNecromante.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar itens do necromante:', error);
+            }
+        }
+
+        function comprarItem(preco) {
+            const saldo = localStorage.getItem('saldo');
+            if (saldo >= preco) {
+                localStorage.setItem('saldo', saldo - preco);
+                alert('Compra realizada com sucesso!');
+            } else {
+                alert('Saldo insuficiente para a compra!');
+            }
+            // Atualiza o saldo exibido
+            document.getElementById('usuario').textContent = `Bem-vindo, ${localStorage.getItem('username')}! Saldo: ${localStorage.getItem('saldo')} Dracmas`;
+        }
+
+        window.onload = function () {
+            const username = localStorage.getItem('username');
+            const saldo = localStorage.getItem('saldo');
+            document.getElementById('usuario').textContent = `Bem-vindo, ${username}! Saldo: ${saldo} Dracmas`;
+            carregarNecromante(); // Carrega os itens do necromante por padrão
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+[
+    {
+        "item": "Garras do Tigre",
+        "nivel": "Raro",
+        "dano": "1d4 (Corte)",
+        "durabilidade": 12,
+        "descricao": "Luvas de couro reforçadas com garras afiadas, imitando as garras de um tigre. Aumenta o dano dos ataques desarmados em +1d4 e concede +1 na Classe de Armadura.",
+        "imagem": "garras_do_tigre.png"
+    },
+    {
+        "item": "Manoplas da Serpente",
+        "nivel": "Raro",
+        "dano": "1d4 (Impacto) + 1d6 (Ácido)",
+        "durabilidade": 12,
+        "descricao": "Manoplas adornadas com entalhes de serpentes, oferecendo agilidade e precisão aos golpes. Concede +1 na CA e aumenta o dano dos ataques desarmados com dano ácido adicional.",
+        "imagem": "manoplas_serpente.png"
+    },
+    {
+        "item": "Luvas da Tempestade Estática",
+        "nivel": "Raro",
+        "dano": "1d4 (Impacto) + 1d8 (Trovão)",
+        "durabilidade": 12,
+        "descricao": "Luvas de couro reforçadas com placas de metal, que acumulam energia elétrica. Causa dano adicional de trovão e concede resistência a dano de trovão e relâmpago.",
+        "imagem": "luvas_tempestade_estatica.png"
+    },
+    {
+        "item": "Luvas do Aço Abrasador",
+        "nivel": "Raro",
+        "dano": "1d4 (Impacto) + 1d8 (Fogo)",
+        "durabilidade": 12,
+        "descricao": "Luvas de aço incandescente, que se aquecem ao toque do usuário. Causam dano adicional de fogo e concedem resistência a dano de fogo.",
+        "imagem": "luvas_aco_abrasador.png"
+    },
+    {
+        "item": "Manoplas do Punho Dourado",
+        "nivel": "Raro",
+        "dano": "1d4 (Impacto) + 2d6 (Radiante)",
+        "durabilidade": 12,
+        "descricao": "Manoplas banhadas em ouro, que emanam uma luz dourada e canalizam poder divino. Aumenta o dano desarmado com dano radiante.",
+        "imagem": "manoplas_punho_dourado.png"
+    }
+]

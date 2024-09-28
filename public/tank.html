@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itens do Tank - Porquinho Mágico</title>
+    <link rel="stylesheet" href="tank.css">
+    <style>
+        #usuario {
+            margin-bottom: 20px;
+        }
+        .item-card {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .item-image {
+            max-width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Itens do Tank</h1>
+        <a href="dashboard.html">Voltar</a>
+        <a href="necromante.html">Necromante</a>
+    </header>
+
+    <div id="usuario"></div>
+    <div id="listaItens"></div>
+
+    <script>
+        async function carregarItensTank() {
+            try {
+                const response = await fetch('/data/tank.json');
+                const data = await response.json();
+                const listaItens = document.getElementById('listaItens');
+                listaItens.innerHTML = '';
+                data.itens.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'item-card';
+                    card.innerHTML = `
+                        <img src="${item.imagem}" alt="${item.nome}" class="item-image">
+                        <div class="item-details">
+                            <strong>${item.nome}</strong>
+                            ${item.descricao ? `<p>${item.descricao}</p>` : ''}
+                            ${item.dano ? `<p>Dano: ${item.dano}</p>` : ''}
+                            ${item.durabilidade ? `<p>Durabilidade: ${item.durabilidade}</p>` : ''}
+                            ${item.db ? `<p>DB: ${item.db}</p>` : ''}
+                            ${item.defesa ? `<p>Defesa: ${item.defesa}</p>` : ''}
+                            ${item.vida_armadura ? `<p>Vida da Armadura: ${item.vida_armadura}</p>` : ''}
+                            ${item.habilidades ? `<p>Habilidades: ${item.habilidades}</p>` : ''}
+                            ${item.efeito_1 ? `<p>Efeito 1: ${item.efeito_1}</p>` : ''}
+                            ${item.efeito_2 ? `<p>Efeito 2: ${item.efeito_2}</p>` : ''}
+                            ${item.nivel ? `<p>Nível: ${item.nivel}</p>` : ''}
+                            ${item.peso ? `<p>Peso: ${item.peso}</p>` : ''}
+                        </div>
+                    `;
+                    listaItens.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar itens do tank:', error);
+            }
+        }
+
+        window.onload = function () {
+            const username = localStorage.getItem('username');
+            document.getElementById('usuario').textContent = `Bem-vindo, ${username}!`;
+            carregarItensTank();
+        }
+    </script>
+</body>
+</html>

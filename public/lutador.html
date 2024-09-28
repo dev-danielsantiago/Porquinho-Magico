@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja do Lutador - Porquinho Mágico</title>
+    <link rel="stylesheet" href="loja.css">
+    <style>
+        #usuario {
+            margin-bottom: 20px;
+        }
+        .item-card {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .item-image {
+            max-width: 100px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Loja do Lutador</h1>
+        <a href="dashboard.html">Voltar</a>
+        <a href="ingredientes.html">Ingredientes</a>
+        <a href="necromante.html">Necromante</a>
+        <a href="tank.html">Tank</a>
+        <a href="samurai.html">Samurai</a>
+        <a href="cacador.html">Caçador</a>
+    </header>
+
+    <div id="usuario"></div>
+    <div id="listaItens"></div>
+
+    <script>
+        async function carregarItens() {
+            try {
+                const response = await fetch('/data/lutador.json');
+                const data = await response.json();
+                const listaItens = document.getElementById('listaItens');
+                listaItens.innerHTML = '';
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'item-card';
+                    card.innerHTML = `
+                        <img src="${item.imagem}" alt="${item.item}" class="item-image">
+                        <div class="item-details">
+                            <strong>${item.item}</strong>
+                            <p>Nível: ${item.nivel}</p>
+                            <p>Dano: ${item.dano}</p>
+                            <p>${item.descricao}</p>
+                            <button class="comprar-button" onclick="comprarItem('${item.item}')">Comprar</button>
+                        </div>
+                    `;
+                    listaItens.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar itens da loja:', error);
+            }
+        }
+
+        window.onload = function () {
+            const username = localStorage.getItem('username');
+            document.getElementById('usuario').textContent = `Bem-vindo, ${username}!`;
+            carregarItens(); // Carrega os itens da loja por padrão
+        }
+    </script>
+</body>
+</html>

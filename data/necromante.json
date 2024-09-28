@@ -1,0 +1,116 @@
+{
+    "itens": [
+        {
+            "nome": "Sangue do Diabo",
+            "tipo": "Componente Mágico",
+            "valor": 200,
+            "descricao": "Reflete dano físico como dano verdadeiro.",
+            "imagem": "caminho/para/imagem/sangue_do_diabo.png"
+        },
+        {
+            "nome": "Medalhão Mal Presságio",
+            "tipo": "Item Mágico",
+            "valor": 300,
+            "descricao": "Anula o resultado do dado do alvo, forçando-o a rolar novamente.",
+            "imagem": "caminho/para/imagem/medalhao_mal_pressagio.png"
+        },
+        {
+            "nome": "Livro da Morte",
+            "tipo": "Grimório",
+            "valor": 500,
+            "descricao": "Preserva corpos dentro de suas páginas, podendo invocá-los.",
+            "imagem": "caminho/para/imagem/livro_da_morte.png"
+        },
+        {
+            "nome": "Sickle: Kammu",
+            "tipo": "Arma",
+            "valor": 100,
+            "descricao": "Curas são reduzidas.",
+            "imagem": "caminho/para/imagem/sickle_kammu.png"
+        },
+        {
+            "nome": "Grande Foice",
+            "tipo": "Arma",
+            "valor": 250,
+            "descricao": "Causam danos adicionais e curas reduzidas.",
+            "imagem": "caminho/para/imagem/grande_foice.png"
+        },
+        {
+            "nome": "Boneco de Palha",
+            "tipo": "Item Mágico",
+            "valor": 150,
+            "descricao": "Vincula maldições a indivíduos específicos.",
+            "imagem": "caminho/para/imagem/boneco_de_palha.png"
+        },
+        {
+            "nome": "Cajado das Almas Inquietas",
+            "tipo": "Cajado Mágico",
+            "valor": 600,
+            "descricao": "Concede bônus para feitiços necromânticos e permite reviver mortos.",
+            "imagem": "caminho/para/imagem/cajado_das_almas.png"
+        },
+        {
+            "nome": "Foice da Colheita Sombria",
+            "tipo": "Arma",
+            "valor": 400,
+            "descricao": "Drena a força vital dos inimigos.",
+            "imagem": "caminho/para/imagem/foice_colheita_sombria.png"
+        },
+        {
+            "nome": "Varinha do Senhor dos Mortos",
+            "tipo": "Varinha Mágica",
+            "valor": 800,
+            "descricao": "Permite criar um servo morto-vivo.",
+            "imagem": "caminho/para/imagem/varinha_senhor_dos_mortos.png"
+        },
+        {
+            "nome": "Cetro da Putrefação",
+            "tipo": "Cetro Mágico",
+            "valor": 400,
+            "descricao": "Causa dano de veneno e cria nevoeiro mortal.",
+            "imagem": "caminho/para/imagem/cetro_da_putrefacao.png"
+        },
+        {
+            "nome": "Livro da Ressurreição Profana",
+            "tipo": "Grimório",
+            "valor": 700,
+            "descricao": "Cria mortos-vivos sob seu controle.",
+            "imagem": "caminho/para/imagem/livro_da_ressurreicao.png"
+        },
+        {
+            "nome": "Lança da Morte Sussurrante",
+            "tipo": "Arma",
+            "valor": 500,
+            "descricao": "Causa dano necrótico e cega inimigos.",
+            "imagem": "caminho/para/imagem/lanca_morte_sussurrante.png"
+        },
+        {
+            "nome": "Faca da Drenagem Vital",
+            "tipo": "Arma",
+            "valor": 350,
+            "descricao": "Cura o usuário com base no dano causado.",
+            "imagem": "caminho/para/imagem/faca_drenagem_vital.png"
+        },
+        {
+            "nome": "Cajado da Sepultura Profunda",
+            "tipo": "Cajado Mágico",
+            "valor": 600,
+            "descricao": "Permite comunicar-se com os mortos.",
+            "imagem": "caminho/para/imagem/cajado_sepultura_profunda.png"
+        },
+        {
+            "nome": "Espada da Perdição",
+            "tipo": "Arma",
+            "valor": 800,
+            "descricao": "Causa dano necrótico em ataques.",
+            "imagem": "caminho/para/imagem/espada_perdicao.png"
+        },
+        {
+            "nome": "Varinha da Escuridão Profunda",
+            "tipo": "Varinha Mágica",
+            "valor": 700,
+            "descricao": "Cria escuridão que não pode ser iluminada.",
+            "imagem": "caminho/para/imagem/varinha_escuridao_profunda.png"
+        }
+    ]
+}

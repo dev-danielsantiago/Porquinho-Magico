@@ -1,0 +1,54 @@
+{
+    "itens": [
+        {
+            "nome": "Matadora",
+            "dano": 15,
+            "durabilidade": 100,
+            "db": 10,
+            "imagem": "caminho/para/imagem/matadora.png"
+        },
+        {
+            "nome": "Kit Tank",
+            "descricao": "Armadura Pesada: Uma armadura robusta que oferece máxima proteção contra ataques físicos. Esta armadura pesada cobre grande parte do corpo, proporcionando resistência adicional.\n\nEscudo Torre: Um escudo de grande porte, conhecido como escudo torre, que oferece uma defesa sólida contra ataques frontais. É eficaz para bloquear ataques diretos e proporciona uma cobertura abrangente.\n\nEspada Longa Europeia: Uma espada longa europeia, equilibrada para cortes e estocadas. É uma arma versátil que pode ser usada tanto para defesa quanto para ataques precisos.",
+            "estrategia": "Defesa Máxima: Com a combinação de armadura pesada e escudo torre, você atinge um nível máximo de defesa física. Isso o torna uma parede impenetrável contra ataques diretos.\n\nAtaque Assustador: Utilize a presença intimidadora do seu kit tank para executar um ataque assustador. A imponência da armadura pesada, escudo torre e a força da espada longa europeia criam uma cena aterrorizante para seus oponentes, podendo afetar seu moral.",
+            "imagem": "caminho/para/imagem/kit_tank.png"
+        },
+        {
+            "nome": "Armadura Básica",
+            "durabilidade": 50,
+            "db": 10,
+            "imagem": "caminho/para/imagem/armadura_basica.png"
+        },
+        {
+            "nome": "Escudo Espartano (Compacto)",
+            "defesa": 3,
+            "vida_armadura": 200,
+            "durabilidade_armadura": 33,
+            "raridade": "Muito Raro",
+            "efeito_1": "Urrar, atrai inimigos para cima do portador do escudo.",
+            "efeito_2": "Tática de Batalha, inimigos focados no portador do escudo ficam vulneráveis a ataques de oportunidade.",
+            "peso": "4.6kg",
+            "imagem": "caminho/para/imagem/escudo_espartano.png"
+        },
+        {
+            "nome": "Martelo da Resistência",
+            "descricao": "Um martelo maciço com runas de proteção gravadas em sua cabeça, emanando uma aura de resistência.",
+            "habilidades": "Concede +2 de resistência a dano físico enquanto empunhado. Uma vez por dia, pode lançar \"Escudo de Resistência\".",
+            "nivel": "★★★★",
+            "dano": "1d10 (Impacto)",
+            "durabilidade": "18/18",
+            "db": "+200",
+            "imagem": "caminho/para/imagem/martelo_resistencia.png"
+        },
+        {
+            "nome": "Escudo da Invencibilidade",
+            "descricao": "Um escudo largo e resistente, incrustado com gemas que brilham com uma luz protetora.",
+            "habilidades": "Concede +2 de CA enquanto empunhado. Uma vez por dia, pode lançar \"Invulnerabilidade\" por 1 minuto.",
+            "nivel": "★★★★",
+            "dano": "1d6 (Impacto)",
+            "durabilidade": "20/20",
+            "db": "+200",
+            "imagem": "caminho/para/imagem/escudo_invencibilidade.png"
+        }
+    ]
+}

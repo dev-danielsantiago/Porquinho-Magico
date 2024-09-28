@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredientes - Porquinho Mágico</title>
+    <link rel="stylesheet" href="loja.css">
+    <style>
+        #usuario {
+            margin-bottom: 20px;
+        }
+        .item-card {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .item-image {
+            max-width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ingredientes</h1>
+        <a href="dashboard.html">Voltar</a>
+        <a href="loja.html">Loja</a> <!-- Link para a página de loja -->
+        <div id="saldo">Saldo: 0 Dracmas</div> <!-- Exibir saldo -->
+    </header>
+
+    <div id="usuario"></div>
+    <div id="listaIngredientes"></div>
+
+    <script>
+        async function carregarIngredientes() {
+            try {
+                const response = await fetch('/data/ingredientes.json');
+                const data = await response.json();
+                const listaIngredientes = document.getElementById('listaIngredientes');
+                listaIngredientes.innerHTML = '';
+                data.ingredientes.forEach(ingrediente => {
+                    const card = document.createElement('div');
+                    card.className = 'item-card';
+                    card.innerHTML = `
+                        <img src="${ingrediente.imagem}" alt="${ingrediente.nome}" class="item-image">
+                        <div class="item-details">
+                            <strong>${ingrediente.nome}</strong>
+                            <p>Preço: ${ingrediente.valor} Dracmas</p>
+                            <p>${ingrediente.descricao}</p>
+                            <button class="comprar-button" onclick="comprarIngrediente(${ingrediente.valor})">Comprar</button>
+                        </div>
+                    `;
+                    listaIngredientes.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar ingredientes da loja:', error);
+            }
+        }
+
+        function comprarIngrediente(valor) {
+            const saldo = Number(localStorage.getItem('saldo')) || 0; // Supondo que o saldo esteja no localStorage
+            if (saldo >= valor) {
+                localStorage.setItem('saldo', saldo - valor);
+                alert(`Ingrediente comprado por ${valor} Dracmas!`);
+                atualizarSaldo(); // Atualiza o saldo após a compra
+            } else {
+                alert('Saldo insuficiente para realizar a compra.');
+            }
+        }
+
+        function atualizarSaldo() {
+            const saldo = Number(localStorage.getItem('saldo')) || 0; // Obtém o saldo atual
+            document.getElementById('saldo').textContent = `Saldo: ${saldo} Dracmas`; // Atualiza o saldo no header
+        }
+
+        window.onload = function () {
+            const username = localStorage.getItem('username');
+            document.getElementById('usuario').textContent = `Bem-vindo, ${username}!`;
+            atualizarSaldo(); // Atualiza o saldo ao carregar a página
+            carregarIngredientes(); // Carrega os ingredientes por padrão
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+[
+    {
+        "item": "Água Benta",
+        "nivel": "Comum",
+        "uso": "Banhar Armas",
+        "descricao": "A Água Benta é utilizada para banhar armas, conferindo a elas propriedades sagradas. Essas armas tornam-se mais eficazes contra seres malignos, infligindo danos adicionais ou neutralizando certas habilidades.",
+        "imagem": "agua_benta.png"
+    },
+    {
+        "item": "[Nome não especificado]",
+        "nivel": "Comum",
+        "dano": "2d6",
+        "durabilidade": 100,
+        "descricao": "Uma arma simples com um bom equilíbrio entre dano e durabilidade, usada por caçadores em suas caçadas diárias.",
+        "imagem": "arma_comum.png"
+    },
+    {
+        "item": "[Nome não especificado]",
+        "nivel": "Comum",
+        "hp": 20,
+        "descricao": "Um item que oferece uma recuperação rápida de 20 pontos de vida ao seu usuário.",
+        "imagem": "recuperacao_hp.png"
+    },
+    {
+        "item": "Grimório de Quimeras",
+        "nivel": "Raro",
+        "conteudo": "Dicas e informações sobre como lidar com criaturas mágicas e sobrenaturais.",
+        "descricao": "Um grimório abrangente que oferece estratégias eficazes para enfrentar ameaças mágicas. Ideal para caçadores que buscam compreender e derrotar criaturas mágicas e sobrenaturais.",
+        "imagem": "grimorio_quimeras.png"
+    },
+    {
+        "item": "Armadilha de Caça",
+        "nivel": "Comum",
+        "dano": 20,
+        "durabilidade": 112,
+        "descricao": "Uma armadilha eficaz para capturar criaturas, infligindo um dano de 20 ao ser ativada.",
+        "imagem": "armadilha_caca.png"
+    },
+    {
+        "item": "Farda de Caçador",
+        "nivel": "Comum",
+        "bonus_destreza": "+1",
+        "vida_armadura": 120,
+        "durabilidade": 22,
+        "descricao": "Uma vestimenta leve usada por caçadores, que oferece um bônus de +2 em testes de esquiva.",
+        "imagem": "farda_cacador.png"
+    },
+    {
+        "item": "Chicote Matador de Vampiros",
+        "nivel": "Único",
+        "dano": "3d12",
+        "durabilidade": 800,
+        "descricao": "Um chicote encantado que causa dano massivo a seres malignos. Causa dano crítico automático em criaturas sobrenaturais, além de possuir o poder de empurrar inimigos e desencadear explosões em seres sobrenaturais.",
+        "imagem": "chicote_vampiros.png"
+    },
+    {
+        "item": "Medalhão de Fhoer",
+        "nivel": "Épico",
+        "descricao": "Um medalhão que vibra em resposta a magia, incluindo maldições e feitiços, além de alertar para a presença de monstros sobrenaturais.",
+        "imagem": "medalhao_fhoer.png"
+    },
+    {
+        "item": "Kit de Mutagênico Fhoer",
+        "nivel": "Lendário",
+        "descricao": "Um kit de mutagênicos projetado para aprimorar os atributos físicos dos caçadores. Contém frascos especializados, cada um com um efeito específico, como aumentar Destreza, Agilidade, Força e outros atributos.",
+        "imagem": "kit_mutagenico_fhoer.png"
+    },
+    {
+        "item": "Armas de Fhoer",
+        "nivel": "Épico",
+        "descricao": "Armas feitas da liga Fhoerita, capaz de regenerar-se, causar dano aumentado em seres sobrenaturais e retornar à mão do caçador se estiver a até 6 metros de distância.",
+        "imagem": "armas_fhoer.png"
+    },
+    {
+        "item": "Arco da Presa Fugaz",
+        "nivel": "Épico",
+        "dano": "1d8 (perfuração)",
+        "durabilidade": 14,
+        "descricao": "Um arco élfico que aumenta o dano com veneno e permite ao caçador usar habilidades furtivas para evitar detecção.",
+        "imagem": "arco_presa_fugaz.png"
+    },
+    {
+        "item": "Besta do Predador da Noite",
+        "nivel": "Épico",
+        "dano": "1d10 (perfuração)",
+        "durabilidade": 12,
+        "descricao": "Uma besta sombria que causa dano necrótico e concede visão no escuro ao caçador.",
+        "imagem": "besta_predador_noite.png"
+    },
+    {
+        "item": "Adaga do Caçador da Lua",
+        "nivel": "Raro",
+        "dano": "1d4 (perfuração)",
+        "durabilidade": 10,
+        "descricao": "Uma adaga que brilha à noite e concede bônus de ataque. Permite ao caçador conjurar o feitiço 'Raio Lunar' uma vez por dia.",
+        "imagem": "adaga_cacador_lua.png"
+    },
+    {
+        "item": "Espada do Predador",
+        "nivel": "Raro",
+        "dano": "1d8 (corte)",
+        "durabilidade": 14,
+        "descricao": "Uma espada que concede bônus de ataque contra criaturas selvagens e permite ao caçador lançar a habilidade 'Marca do Caçador'.",
+        "imagem": "espada_predador.png"
+    },
+    {
+        "item": "Manto da Floresta Viva",
+        "nivel": "Raro",
+        "durabilidade": 14,
+        "descricao": "Um manto regenerativo que oferece resistência a veneno e fogo, além de permitir ao usuário se camuflar na floresta e lançar 'Invisibilidade' uma vez por dia.",
+        "imagem": "manto_floresta_viva.png"
+    }
+]

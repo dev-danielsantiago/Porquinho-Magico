@@ -1,0 +1,85 @@
+[
+    {
+        "item": "Armadura Mediana",
+        "nivel": "Comum",
+        "hp": 45,
+        "redutor_movimentacao": -1,
+        "descricao": "Uma armadura de proteção média, oferecendo um bom equilíbrio entre defesa e mobilidade. Possui um leve redutor de movimentação.",
+        "imagem": "armadura_mediana.png"
+    },
+    {
+        "item": "Espada Simples",
+        "nivel": "Comum",
+        "dano": 5,
+        "durabilidade": 120,
+        "descricao": "Uma espada básica, oferecendo um dano constante de 5 e uma durabilidade razoável, ideal para guerreiros iniciantes.",
+        "imagem": "espada_simples.png"
+    },
+    {
+        "item": "Escudo Rúnico",
+        "nivel": "Raro",
+        "durabilidade": 100,
+        "descricao": "Um escudo raro com espaço para uma runa, que pode ser usado para melhorar suas capacidades mágicas e defensivas.",
+        "imagem": "escudo_runico.png"
+    },
+    {
+        "item": "Espada Reta",
+        "nivel": "Incomum",
+        "dano": "2d8+8 + Força",
+        "tipo_dano": "Perfurante",
+        "propriedades": "Uma mão",
+        "peso": "4kg",
+        "descricao": "Uma espada reta e equilibrada, que concede +1 em jogadas de força. Ideal para combate corpo a corpo.",
+        "imagem": "espada_reta.png"
+    },
+    {
+        "item": "Centurião Escarlate",
+        "nivel": "Muito Raro",
+        "vida_armadura": 122,
+        "durabilidade": 52,
+        "descricao": "Uma vestimenta leve que concede +3 de bônus de defesa e resistência física, ideal para guerreiros com grande agilidade e força.",
+        "peso": "15kg",
+        "imagem": "centuriao_escarlate.png"
+    },
+    {
+        "item": "Espada Larga - Gran'Disha",
+        "nivel": "Raro",
+        "material": "Ferro de Dragão",
+        "dano": "3d6 + 10 + Força",
+        "durabilidade": 125,
+        "descricao": "Uma espada pesada feita de Ferro de Dragão, com grande poder de ataque. Possui espaço para runas e a habilidade de realizar ataques giratórios que atingem vários inimigos.",
+        "imagem": "gran_disha.png"
+    },
+    {
+        "item": "Machado Solrac",
+        "nivel": "Muito Raro",
+        "dano": "+1 no ataque",
+        "durabilidade": 850,
+        "descricao": "Um machado associado ao Sol Negro, que causa dano adicional de fogo e necrótico. Possui o poder de banir criaturas para outros planos de existência em ataques críticos.",
+        "imagem": "machado_solrac.png"
+    },
+    {
+        "item": "Espada da Fúria Elemental",
+        "nivel": "Muito Raro",
+        "dano": "1d8 (Corte)",
+        "durabilidade": 16,
+        "descricao": "Uma espada adornada com runas elementais, que permite canalizar a fúria dos elementos. Concede dano adicional de fogo, gelo ou trovão e permite lançar feitiços elementais como 'Bola de Fogo' ou 'Raio de Gelo'.",
+        "imagem": "espada_furia_elemental.png"
+    },
+    {
+        "item": "Martelo do Titã",
+        "nivel": "Muito Raro",
+        "dano": "1d10 (Impacto)",
+        "durabilidade": 18,
+        "descricao": "Um martelo maciço que cria ondas de choque ao ser usado. Causa dano adicional de trovão e pode empurrar inimigos em ataques críticos.",
+        "imagem": "martelo_tita.png"
+    },
+    {
+        "item": "Lança do Dragão",
+        "nivel": "Muito Raro",
+        "dano": "1d8 (Perfuração)",
+        "durabilidade": 14,
+        "descricao": "Uma lança adornada com escamas de dragão, que canaliza o poder do fogo do lendário reptil. Permite ao usuário lançar 'Sopro do Dragão' uma vez por dia.",
+        "imagem": "lanca_dragao.png"
+    }
+]

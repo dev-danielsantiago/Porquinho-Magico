@@ -1,0 +1,301 @@
+{
+    "itens": [
+        {
+            "nome": "Poção Cura Simples",
+            "material": "Lesma sangrenta, olhos de morcego e planta dragon de fogo",
+            "tipo": "Poção",
+            "graduacao": "*",
+            "poder_de_ataque": 0,
+            "durabilidade": "uso único",
+            "efeito": 5,
+            "descricao": "Esta poção cura 5 pontos de vida, permitindo que o usuário se recupere rapidamente. A utilização da poção deve ser registrada para monitorar a toxicidade.",
+            "custo": 50,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Poção Aura Simples",
+            "material": "ossos de ethuu, língua do sapo de gelo e planta dragon de gelo",
+            "tipo": "Poção",
+            "graduacao": "*",
+            "poder_de_ataque": 0,
+            "durabilidade": "uso único",
+            "efeito": 5,
+            "descricao": "Esta poção restaura 5 pontos de aura, permitindo que o usuário reforce sua energia espiritual. A toxicidade deve ser monitorada.",
+            "custo": 50,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Poção Veneno de Aura Simples",
+            "material": "sangue de bruxa, língua do bode e ervas do demônio",
+            "tipo": "Poção",
+            "graduacao": "*",
+            "poder_de_ataque": 0,
+            "durabilidade": "uso único",
+            "efeito": -2,
+            "descricao": "Esta poção envenena a aura do usuário, reduzindo-a em 2 pontos. O efeito é instantâneo e deve ser utilizado com cautela. A utilização da poção deve ser registrada para monitorar a toxicidade.",
+            "custo": 100,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Tocha",
+            "tipo": "Equipamento de aventura (fonte de luz)",
+            "durabilidade": "1 hora",
+            "efeito": "Queima por 1 hora fornecendo luz brilhante em um raio de 20 pés",
+            "descricao": "Uma fonte de luz portátil que também pode ser usada como arma improvisada, causando 1 de dano de fogo ao acertar.",
+            "custo": 10,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Lanterna",
+            "tipo": "Equipamento de aventura (fonte de luz)",
+            "durabilidade": "6 horas por frasco (1 litro) de óleo",
+            "efeito": "Fornece luz brilhante com raio de 30 pés",
+            "descricao": "Lanterna que queima por 6 horas, perfeita para iluminar grandes áreas. Possui ação para limitar a luz a um raio de 5 pés.",
+            "custo": 150,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Kit de Refeição",
+            "tipo": "Equipamento de aventura (Kit)",
+            "descricao": "Um kit essencial para preparar refeições durante a aventura.",
+            "custo": 25,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Ração de Viagem",
+            "tipo": "Consumível (uso único)",
+            "descricao": "Ração nutritiva para sustentar o aventureiro em jornadas longas.",
+            "custo": 20,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Óleo",
+            "tipo": "Equipamento de aventura (Combustível)",
+            "descricao": "Óleo versátil, pode ser usado para iluminar ou como combustível.",
+            "custo": 50,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Pedras de Forja",
+            "tipo": "Aprimoramento",
+            "descricao": "Relíquias poderosas que podem aprimorar armas e equipamentos. Apenas itens com o emblema '⚒' podem ser aprimorados. Cada nível aumenta substancialmente as características do item, de +2 a +20, dependendo do nível da pedra.",
+            "custo": 200,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Anel do Espírito Familiar",
+            "material": "Paládio e 38 fragmentos do Espírito de uma criatura",
+            "tipo": "Assessório",
+            "graduacao": "Lendário",
+            "poder_de_ataque": 0,
+            "encantamentos": [
+                "Inquebrável: O item tem o dobro do valor de durabilidade.",
+                "Vínculo de Alma: O item é vinculado à alma do 'Pactuante'."
+            ],
+            "durabilidade": "200/200",
+            "descricao": "Um anel que permite armazenar e convocar um familiar, oferecendo proteção mágica ao seu portador.",
+            "custo_minimo": 3125,
+            "custo_maximo": 6243,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Traje Tático Personalizado",
+            "material": "Aço, Ferro, Couro de besta mística, Madeira, Pedra de Obsidiana",
+            "tipo": "Armadura",
+            "graduacao": "Única",
+            "defesa": "64-300",
+            "descricao": "Armadura leve e flexível, perfeita para aventuras táticas e personalizações, proporcionando maior mobilidade ao usuário.",
+            "custo": 5000,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Baú",
+            "tipo": "Equipamento de Armazenamento",
+            "descricao": "Um baú resistente e confiável para gerenciar equipamentos e tesouros durante aventuras. Possui capacidade generosa e segurança adicional.",
+            "custo": 100,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Baú de Câmbio do Mercado Negro",
+            "tipo": "Item Raro",
+            "descricao": "Um baú misterioso que permite ao portador vender itens de forma discreta. Se fechado sem valor declarado, o conteúdo permanece seguro.",
+            "custo": 1500,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Kit de Calígrafo",
+            "tipo": "Equipamento de aventura (Kit)",
+            "descricao": "Kit essencial para registrar informações e criações artísticas, ideal para aventureiros que desejam documentar suas jornadas.",
+            "custo": 30,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Tinta da Pergaminho",
+            "tipo": "Equipamento de aventura",
+            "descricao": "Tinta de qualidade para escrever em pergaminhos, permitindo ao usuário registrar feitiços e anotações.",
+            "custo": 15,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Caneta Tinteiro",
+            "tipo": "Equipamento de aventura",
+            "descricao": "Caneta projetada para escrever com precisão, ideal para a redação de documentos importantes.",
+            "custo": 20,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Pergaminho",
+            "tipo": "Equipamento de aventura",
+            "quantidade": 3,
+            "descricao": "Papel para anotações e inscrições mágicas, essencial para qualquer aventureiro.",
+            "custo": 10,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Pedra de Amolar",
+            "tipo": "Equipamento de aventura",
+            "descricao": "Ferramenta para recuperar durabilidade de equipamentos, mantendo armas e ferramentas em excelente estado.",
+            "custo": 60,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Caixa de Fogo",
+            "tipo": "Equipamento de aventura",
+            "descricao": "Caixa utilizada para iniciar fogo facilmente, útil em diversas situações.",
+            "custo": 40,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Aríete Portátil",
+            "tipo": "Equipamento de Aventura",
+            "descricao": "Ferramenta poderosa para destruição de estruturas, ideal para arrombar portas e portões.",
+            "custo": 250,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Caneca",
+            "tipo": "Equipamento de Aventura",
+            "descricao": "Caneca resistente, ideal para aventuras e bebidas quentes.",
+            "custo": 30,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Balde",
+            "tipo": "Equipamento de Aventura",
+            "descricao": "Balde versátil, útil em diversas situações, como transporte de água.",
+            "custo": 20,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Saco",
+            "tipo": "Equipamento de Aventura",
+            "descricao": "Saco prático para transporte de itens, ideal para aventuras.",
+            "custo": 15,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Bolsa de Componentes",
+            "tipo": "Equipamento de Aventura",
+            "descricao": "Bolsa que contém 9 slots adicionais para componentes e ingredientes, ideal para magos e alquimistas.",
+            "custo": 100,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Kit de Escalada",
+            "tipo": "Equipamento de Aventura",
+            "descricao": "+2 em testes relacionados à escalada, essencial para aventureiros que exploram terrenos difíceis.",
+            "custo": 150,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Luneta",
+            "tipo": "Equipamento de Aventura",
+            "descricao": "Permite visão plena a distâncias maiores, útil para explorar áreas distantes.",
+            "custo": 200,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Sino",
+            "tipo": "Equipamento de Aventura",
+            "descricao": "Produz som alto até 32 metros, útil para sinalização ou chamar a atenção.",
+            "custo": 80,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Saco de Dormir",
+            "tipo": "Equipamento de Aventura",
+            "descricao": "Recupera pontos de vida e aura mais rápido por menos tempo, essencial para descansar durante aventuras.",
+            "custo": 70,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Pé de Cabra",
+            "tipo": "Equipamento de Aventura",
+            "descricao": "Ferramenta multifuncional com +1 em testes variados, ideal para abrir portas e janelas.",
+            "custo": 90,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Grande Espada do Império",
+            "descricao": "Uma espada maciça e imponente, refletindo a luz com um brilho dourado. Ideal para campeões do império. Aumenta o ataque corpo a corpo em até +45%, dependendo da proficiência.",
+            "custo": 800,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Arco da Floresta Eterna",
+            "descricao": "Um arco feito de madeira polida, adornado com entalhes que retratam a natureza exuberante. Aumenta a velocidade de ataque em até +45%, dependendo da proficiência.",
+            "custo": 820,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Cajado das Terras Congeladas",
+            "descricao": "Cajado esculpido de carvalho antigo, tingido com pigmentos que emanam uma aura de frio intenso. Aumenta o poder mágico em até +45%, dependendo da proficiência.",
+            "custo": 840,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Armadura do Reino",
+            "descricao": "Imponente armadura feita sob medida para campeões, forjada com aço temperado e reforçada magicamente. Aumenta a proteção em até +45%, dependendo da proficiência.",
+            "custo": 833,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Coroa de Duendes",
+            "descricao": "Relíquia adornada com joias, forjada pelos duendes para conceder astúcia e riqueza. Aumenta o ganho de ouro em até 12% durante invasões.",
+            "custo": 900,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Chifre da Guarda",
+            "descricao": "Artefato esculpido que inspira coragem e determinação nos defensores do castelo. Aumenta a XP do castelo em até 70%, dependendo da habilidade do portador.",
+            "custo": 1000,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Diário de Aventureiros",
+            "descricao": "Livro encadernado em couro, com relatos e segredos de expedições passadas. Aumenta os bônus durante expedições em até 23%.",
+            "custo": 1000,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "A Coletora",
+            "tipo": "Arma de Fogo (Garrucha)",
+            "descricao": "Arma de fogo mortalmente precisa, ideal para caçadores de recompensas. Causa 55 de dano perfurante e permite um bônus de 25 de ouro adicional por abate.",
+            "custo": 3000,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "A Espátula Dourada",
+            "descricao": "Item mítico que transcende a lógica dos campos de batalha, combina poder físico e mágico. Possui diversos atributos que aumentam a eficiência em combate.",
+            "custo": 7487,
+            "imagem": "caminho/para/imagem.jpg"
+        },
+        {
+            "nome": "Abatedora",
+            "tipo": "Arma Branca (Foice)",
+            "descricao": "Foice elegante que drena a vitalidade do alvo e restaura a saúde do portador. Cada abate oferece ouro adicional e aumenta a aura do usuário.",
+            "custo": 450,
+            "imagem": "caminho/para/imagem.jpg"
+        }
+    ]
+}

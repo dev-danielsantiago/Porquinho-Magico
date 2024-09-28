@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja - Porquinho Mágico</title>
+    <link rel="stylesheet" href="loja.css">
+    <style>
+        #usuario {
+            margin-bottom: 20px;
+        }
+        .item-card {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .item-image {
+            max-width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Loja</h1>
+        <a href="dashboard.html">Voltar</a>
+        <a href="ingredientes.html">Ingredientes</a> <!-- Link para a página de ingredientes -->
+        <a href="necromante.html">Necromancer</a>
+        <a href="tank.html">Tank</a>
+        <a href="samurai.html">Samurai</a>
+        <a href="cacador.html">Caçador</a>
+        <a href="lutador.html">Lutador</a>
+        <a href="guerreiro.html">Gueirreiro</a>
+    </header>
+
+    <div id="usuario"></div>
+    <div id="listaItens"></div>
+
+    <script>
+        async function carregarItens() {
+            try {
+                const response = await fetch('/data/lojas.json');
+                const data = await response.json();
+                const listaItens = document.getElementById('listaItens');
+                listaItens.innerHTML = '';
+                data.itens.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'item-card';
+                    card.innerHTML = `
+                        <img src="${item.imagem}" alt="${item.nome}" class="item-image">
+                        <div class="item-details">
+                            <strong>${item.nome}</strong>
+                            <p>Preço: ${item.valor} Dracmas</p>
+                            <p>${item.descricao}</p>
+                            <button class="comprar-button" onclick="comprarItem(${item.id})">Comprar</button>
+                        </div>
+                    `;
+                    listaItens.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar itens da loja:', error);
+            }
+        }
+
+        window.onload = function () {
+            const username = localStorage.getItem('username');
+            document.getElementById('usuario').textContent = `Bem-vindo, ${username}!`;
+            carregarItens(); // Carrega os itens da loja por padrão
+        }
+    </script>
+</body>
+</html>

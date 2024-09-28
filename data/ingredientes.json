@@ -1,0 +1,604 @@
+{
+    "ingredientes": [
+        {
+            "nome": "Cristal Arcano",
+            "material": "Cristal raro",
+            "tipo": "Mineral",
+            "valor": 353,
+            "descricao": "Um cristal que contém energias arcanas, ideal para poções e feitiços.",
+            "imagem": "caminho/para/imagem_cristal_arcano.jpg"
+        },
+        {
+            "nome": "Cristal de Vida",
+            "material": "Cristal raro",
+            "tipo": "Mineral",
+            "valor": 203,
+            "descricao": "Um cristal que pode revitalizar as forças vitais, utilizado em rituais de cura.",
+            "imagem": "caminho/para/imagem_cristal_vida.jpg"
+        },
+        {
+            "nome": "Estibnite da Peste",
+            "material": "Mineral tóxico",
+            "tipo": "Mineral",
+            "valor": 252,
+            "descricao": "Um mineral que é tanto um veneno quanto um remédio, usado em poções de dano.",
+            "imagem": "caminho/para/imagem_estibnite.jpg"
+        },
+        {
+            "nome": "Fábula Bismuto",
+            "material": "Metal raro",
+            "tipo": "Mineral",
+            "valor": 1079,
+            "descricao": "Um metal colorido que brilha sob a luz mágica, usado em itens de encantamento.",
+            "imagem": "caminho/para/imagem_bismuto.jpg"
+        },
+        {
+            "nome": "Lingote de Clorófito",
+            "material": "Clorófito mágico",
+            "tipo": "Mineral Mágico",
+            "valor": 750,
+            "descricao": "Um mineral raro conhecido por suas propriedades curativas e estimulantes.",
+            "imagem": "caminho/para/imagem_clorofito.jpg"
+        },
+        {
+            "nome": "Lingote de Cobalto",
+            "material": "Cobalto raro",
+            "tipo": "Metal Precioso",
+            "valor": 300,
+            "descricao": "Um metal azul que é altamente resistente e usado em itens mágicos.",
+            "imagem": "caminho/para/imagem_cobalto.jpg"
+        },
+        {
+            "nome": "Lingote de Cobre",
+            "material": "Cobre comum",
+            "tipo": "Metal Comum",
+            "valor": 20,
+            "descricao": "Um metal amplamente utilizado, ideal para a criação de itens simples.",
+            "imagem": "caminho/para/imagem_cobre.jpg"
+        },
+        {
+            "nome": "Lingote de Crimante",
+            "material": "Crimante mágico",
+            "tipo": "Material Mágico",
+            "valor": 112500,
+            "descricao": "Um metal mágico conhecido por sua ligação com explosões poderosas.",
+            "imagem": "caminho/para/imagem_crimante.jpg"
+        },
+        {
+            "nome": "Lingote Encantado",
+            "material": "Metal encantado",
+            "tipo": "Material Mágico",
+            "valor": 75000,
+            "descricao": "Um material mágico que amplifica as propriedades de outros itens.",
+            "imagem": "caminho/para/imagem_encantado.jpg"
+        },
+        {
+            "nome": "Lingote de Erídio",
+            "material": "Erídio raro",
+            "tipo": "Metal Exótico",
+            "valor": 37500,
+            "descricao": "Um metal raro que pode captar e amplificar fontes de energia.",
+            "imagem": "caminho/para/imagem_eridio.jpg"
+        },
+        {
+            "nome": "Lingote de Ouro",
+            "material": "Ouro precioso",
+            "tipo": "Metal Precioso",
+            "valor": 35000,
+            "descricao": "Um dos metais mais valiosos e resistentes, amplamente utilizado em joias.",
+            "imagem": "caminho/para/imagem_ouro.jpg"
+        },
+        {
+            "nome": "Lingote Sagrado",
+            "material": "Aço Sagrado",
+            "tipo": "Metal Divino",
+            "valor": 22500,
+            "descricao": "Uma liga metálica divina eficaz contra as forças do mal.",
+            "imagem": "caminho/para/imagem_sagrado.jpg"
+        },
+        {
+            "nome": "Lingote de Aço Infernal",
+            "material": "Aço Infernal",
+            "tipo": "Metal Maldito",
+            "valor": 15000,
+            "descricao": "Um metal temido, conhecido por sua resistência e natureza maldita.",
+            "imagem": "caminho/para/imagem_infernal.jpg"
+        },
+        {
+            "nome": "Lingote de Luminita",
+            "material": "Luminita mágica",
+            "tipo": "Material Luminoso",
+            "valor": 3000,
+            "descricao": "Um material que emite luz suave, ideal para itens mágicos de luz.",
+            "imagem": "caminho/para/imagem_luminita.jpg"
+        },
+        {
+            "nome": "Lingote de Meteorito",
+            "material": "Meteorito estelar",
+            "tipo": "Metal Exótico",
+            "valor": 35000,
+            "descricao": "Um metal de origem cósmica com propriedades extraordinárias.",
+            "imagem": "caminho/para/imagem_meteorito.jpg"
+        },
+        {
+            "nome": "Lingote de Mythrill",
+            "material": "Mythrill raro",
+            "tipo": "Metal Precioso",
+            "valor": 4000,
+            "descricao": "Um metal leve e resistente, ideal para armaduras e armas.",
+            "imagem": "caminho/para/imagem_mythrill.jpg"
+        },
+        {
+            "nome": "Lingote de Ferro",
+            "material": "Ferro comum",
+            "tipo": "Metal Comum",
+            "valor": 100,
+            "descricao": "Um metal amplamente utilizado, essencial em qualquer forja.",
+            "imagem": "caminho/para/imagem_ferro.jpg"
+        },
+        {
+            "nome": "Lingote de Adamantita",
+            "material": "Adamantita rara",
+            "tipo": "Metal Lendário",
+            "valor": 15000,
+            "descricao": "Um dos metais mais duráveis e resistentes à magia.",
+            "imagem": "caminho/para/imagem_adamantita.jpg"
+        },
+        {
+            "nome": "Lingote de Oricalco",
+            "material": "Oricalco lendário",
+            "tipo": "Metal Precioso",
+            "valor": 17500,
+            "descricao": "Um metal raro que amplifica poderes arcanos.",
+            "imagem": "caminho/para/imagem_oricalco.jpg"
+        },
+        {
+            "nome": "Lingote de Espectro",
+            "material": "Espectro etéreo",
+            "tipo": "Material Raro",
+            "valor": 1000,
+            "descricao": "Um metal que interage com o mundo espectral.",
+            "imagem": "caminho/para/imagem_espectro.jpg"
+        },
+        {
+            "nome": "Lingote de Aço",
+            "material": "Aço comum",
+            "tipo": "Lingote Metálico",
+            "valor": 185,
+            "descricao": "Uma liga de ferro e carbono amplamente utilizada.",
+            "imagem": "caminho/para/imagem_aco.jpg"
+        },
+        {
+            "nome": "Lingote de Tungstênio",
+            "material": "Tungstênio denso",
+            "tipo": "Metal Raro",
+            "valor": 1150,
+            "descricao": "Um metal denso e resistente, ideal para aplicações industriais.",
+            "imagem": "caminho/para/imagem_tungstenio.jpg"
+        },
+        {
+            "nome": "Lingote de Prata",
+            "material": "Prata preciosa",
+            "tipo": "Metal Precioso",
+            "valor": 75,
+            "descricao": "Um metal amplamente utilizado em joias e utensílios.",
+            "imagem": "caminho/para/imagem_prata.jpg"
+        },
+        {
+            "nome": "Lingote de Paládio",
+            "material": "Paládio valioso",
+            "tipo": "Metal Precioso",
+            "valor": 900,
+            "descricao": "Um metal raro utilizado em várias aplicações industriais.",
+            "imagem": "caminho/para/imagem_paladio.jpg"
+        },
+        {
+            "nome": "Coração de Besta Mística",
+            "material": "Coração mágico",
+            "tipo": "Animal",
+            "valor": 655,
+            "descricao": "Um órgão extraordinário de uma criatura lendária, amplificador de magia.",
+            "imagem": "caminho/para/imagem_coracao_besta.jpg"
+        },
+        {
+            "nome": "Dedo de Bruxa",
+            "material": "Dedo mágico",
+            "tipo": "Animal",
+            "valor": 360,
+            "descricao": "Um ingrediente raro usado em feitiços poderosos.",
+            "imagem": "caminho/para/imagem_dedo_bruxa.jpg"
+        },
+        {
+            "nome": "Fragmento de Espírito",
+            "material": "Energia mística",
+            "tipo": "Energia",
+            "valor": 746,
+            "descricao": "Um fragmento de uma entidade mágica, utilizado em rituais.",
+            "imagem": "caminho/para/imagem_fragmento_espirito.jpg"
+        },
+        {
+            "nome": "Flor Sinistra",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 95,
+            "descricao": "Uma planta misteriosa usada em poções de maldição.",
+            "imagem": "caminho/para/imagem_flor_sinistra.jpg"
+        },
+        {
+            "nome": "Campainha de Fogo",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 75,
+            "descricao": "Usada em poções de resistência ao fogo e rituais de invocação.",
+            "imagem": "caminho/para/imagem_campainha_fogo.jpg"
+        },
+        {
+            "nome": "Flor do Vento",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 60,
+            "descricao": "Essencial em poções que aumentam a agilidade.",
+            "imagem": "caminho/para/imagem_flor_vento.jpg"
+        },
+        {
+            "nome": "Flor d'água",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 67,
+            "descricao": "Base para poções de cura e resistência a venenos.",
+            "imagem": "caminho/para/imagem_flor_agua.jpg"
+        },
+        {
+            "nome": "Terraria",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 45,
+            "descricao": "Ingrediente chave em poções de resistência física.",
+            "imagem": "caminho/para/imagem_terarria.jpg"
+        },
+        {
+            "nome": "Folhas Salva-Vidas",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 90,
+            "descricao": "Usada para criar poções de regeneração rápida.",
+            "imagem": "caminho/para/imagem_folhas_salva_vidas.jpg"
+        },
+        {
+            "nome": "Emaranhado",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 82,
+            "descricao": "Utilizada em poções que criam vinhas imobilizadoras.",
+            "imagem": "caminho/para/imagem_emaranhado.jpg"
+        },
+        {
+            "nome": "Espinheiro Dourado",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 120,
+            "descricao": "Essencial em poções de proteção.",
+            "imagem": "caminho/para/imagem_espinheiro_dourado.jpg"
+        },
+        {
+            "nome": "Gudberry",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 50,
+            "descricao": "Usada em poções de energia e resistência.",
+            "imagem": "caminho/para/imagem_gudberry.jpg"
+        },
+        {
+            "nome": "Banana Peluda",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 105,
+            "descricao": "Usada para aumentar a força física.",
+            "imagem": "caminho/para/imagem_banana_peluda.jpg"
+        },
+        {
+            "nome": "Fruta Gelada",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 90,
+            "descricao": "Base para poções de resistência ao frio.",
+            "imagem": "caminho/para/imagem_fruta_gelada.jpg"
+        },
+        {
+            "nome": "Cardo Trovão",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 112,
+            "descricao": "Essencial para poções que envolvem eletricidade.",
+            "imagem": "caminho/para/imagem_cardo_trovao.jpg"
+        },
+        {
+            "nome": "Espinheiro Sangrento",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 90,
+            "descricao": "Usado em poções que aumentam a agressividade.",
+            "imagem": "caminho/para/imagem_espinheiro_sangrento.jpg"
+        },
+        {
+            "nome": "Beterraba dos Sonhos",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 135,
+            "descricao": "Ingrediente chave em poções que induzem sonhos lúcidos.",
+            "imagem": "caminho/para/imagem_beterraba_sonhos.jpg"
+        },
+        {
+            "nome": "Alecrim do Druida",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 90,
+            "descricao": "Usado em poções ou rituais de cura.",
+            "imagem": "caminho/para/imagem_alecrim.jpg"
+        },
+        {
+            "nome": "Flor de Pena",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 120,
+            "descricao": "Utilizada em poções que aumentam a agilidade.",
+            "imagem": "caminho/para/imagem_flor_pena.jpg"
+        },
+        {
+            "nome": "Raiz de Flor de Pena",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 70,
+            "descricao": "Usada em poções que aumentam a destreza.",
+            "imagem": "caminho/para/imagem_raiz_flor_pena.jpg"
+        },
+        {
+            "nome": "Flor Fofa",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 90,
+            "descricao": "Utilizada em poções que promovem o bem-estar.",
+            "imagem": "caminho/para/imagem_flor_fofa.jpg"
+        },
+        {
+            "nome": "Urze do Curandeiro",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 75,
+            "descricao": "Ingrediente crucial em poções de cura.",
+            "imagem": "caminho/para/imagem_urze_curandeiro.jpg"
+        },
+        {
+            "nome": "Flor Encantada",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 150,
+            "descricao": "Usada em feitiços que aumentam a potência mágica.",
+            "imagem": "caminho/para/imagem_flor_encantada.jpg"
+        },
+        {
+            "nome": "Samambaia Perene",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 100,
+            "descricao": "Ingrediente para poções que aumentam a vitalidade.",
+            "imagem": "caminho/para/imagem_samambaia_perene.jpg"
+        },
+        {
+            "nome": "Baga de Mago",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 150,
+            "descricao": "Essencial para poções que aumentam a capacidade mágica.",
+            "imagem": "caminho/para/imagem_baga_mago.jpg"
+        },
+        {
+            "nome": "Botão do Terror",
+            "material": "Planta mágica",
+            "tipo": "Erva",
+            "valor": 55,
+            "descricao": "Usada em poções que induzem medo.",
+            "imagem": "caminho/para/imagem_botao_terror.jpg"
+        },
+        {
+            "nome": "Sela da Dríade",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 30,
+            "descricao": "Usado em poções que aumentam a conexão com a natureza.",
+            "imagem": "caminho/para/imagem_sela_driade.jpg"
+        },
+        {
+            "nome": "Cogumelo Louco",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 35,
+            "descricao": "Usado em poções que causam alucinações.",
+            "imagem": "caminho/para/imagem_cogumelo_louco.jpg"
+        },
+        {
+            "nome": "Cogumelo do Pântano",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 45,
+            "descricao": "Ingrediente para poções que aumentam a resistência a ambientes úmidos.",
+            "imagem": "caminho/para/imagem_cogumelo_pantano.jpg"
+        },
+        {
+            "nome": "Cogumelo de Lama",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 75,
+            "descricao": "Usado em poções que aumentam a força física.",
+            "imagem": "caminho/para/imagem_cogumelo_lama.jpg"
+        },
+        {
+            "nome": "Cogumelo Fedorento",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 25,
+            "descricao": "Usado em poções que emitem odores fortes.",
+            "imagem": "caminho/para/imagem_cogumelo_fedorento.jpg"
+        },
+        {
+            "nome": "Prateleira de Enxofre",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 50,
+            "descricao": "Usado em poções que criam efeitos de fumaça.",
+            "imagem": "caminho/para/imagem_prateleira_enxofre.jpg"
+        },
+        {
+            "nome": "Cogumelo Bruxa",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 30,
+            "descricao": "Usado em poções de feitiçaria avançada.",
+            "imagem": "caminho/para/imagem_cogumelo_bruxa.jpg"
+        },
+        {
+            "nome": "Cantarelli das Sombras",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 55,
+            "descricao": "Usado em poções que aumentam a invisibilidade.",
+            "imagem": "caminho/para/imagem_cantarelli_sombras.jpg"
+        },
+        {
+            "nome": "Cogumelo Estranho",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 40,
+            "descricao": "Usado em feitiçaria experimental.",
+            "imagem": "caminho/para/imagem_cogumelo_estranho.jpg"
+        },
+        {
+            "nome": "Guarda-sol Nebuloso",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 80,
+            "descricao": "Usado em poções que criam névoa.",
+            "imagem": "caminho/para/imagem_guarda_sol_nebuloso.jpg"
+        },
+        {
+            "nome": "Cogumelo Goblin",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 40,
+            "descricao": "Usado em poções que aumentam a agilidade.",
+            "imagem": "caminho/para/imagem_cogumelo_goblin.jpg"
+        },
+        {
+            "nome": "Cogumelo Musgo",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 35,
+            "descricao": "Usado em poções que aumentam a resistência.",
+            "imagem": "caminho/para/imagem_cogumelo_musgo.jpg"
+        },
+        {
+            "nome": "Saia Fantasma",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 120,
+            "descricao": "Usado em poções que conferem invisibilidade.",
+            "imagem": "caminho/para/imagem_saia_fantasma.jpg"
+        },
+        {
+            "nome": "Cogumelo-de-Couro",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 25,
+            "descricao": "Usado em poções que aumentam a resistência à dor.",
+            "imagem": "caminho/para/imagem_cogumelo_de_couro.jpg"
+        },
+        {
+            "nome": "Touca d’água",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 110,
+            "descricao": "Usado em poções que permitem respirar debaixo d'água.",
+            "imagem": "caminho/para/imagem_touca_agua.jpg"
+        },
+        {
+            "nome": "Cogumelo Kraken",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 75,
+            "descricao": "Usado em poções que controlam água.",
+            "imagem": "caminho/para/imagem_cogumelo_kraken.jpg"
+        },
+        {
+            "nome": "Cogumelo Luxúria",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 125,
+            "descricao": "Usado em poções que intensificam emoções.",
+            "imagem": "caminho/para/imagem_cogumelo_luxuria.jpg"
+        },
+        {
+            "nome": "Magma Morel",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 105,
+            "descricao": "Usado em poções que aumentam a resistência ao calor.",
+            "imagem": "caminho/para/imagem_magma_morel.jpg"
+        },
+        {
+            "nome": "Trufa Grave",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 135,
+            "descricao": "Usado em poções que oferecem benefícios relacionados à terra.",
+            "imagem": "caminho/para/imagem_trufa_grave.jpg"
+        },
+        {
+            "nome": "Boné Arco-íris",
+            "material": "Cogumelo mágico",
+            "tipo": "Cogumelo",
+            "valor": 150,
+            "descricao": "Usado em poções que alteram a percepção de cores.",
+            "imagem": "caminho/para/imagem_bone_arco_iris.jpg"
+        },
+        {
+            "nome": "Cristal Nuvem",
+            "material": "Cristal raro",
+            "tipo": "Mineral",
+            "valor": 375,
+            "descricao": "Usado em feitiçaria que manipula o clima.",
+            "imagem": "caminho/para/imagem_cristal_nuvem.jpg"
+        },
+        {
+            "nome": "Pirita da Terra",
+            "material": "Cristal raro",
+            "tipo": "Mineral",
+            "valor": 263,
+            "descricao": "Utilizado para feitiçaria que controla a terra.",
+            "imagem": "caminho/para/imagem_pirita_terra.jpg"
+        },
+        {
+            "nome": "Safira Gelada",
+            "material": "Cristal raro",
+            "tipo": "Mineral",
+            "valor": 300,
+            "descricao": "Ingrediente em feitiçaria de gelo.",
+            "imagem": "caminho/para/imagem_safira_gelada.jpg"
+        },
+        {
+            "nome": "Citrino de Fogo",
+            "material": "Cristal raro",
+            "tipo": "Mineral",
+            "valor": 300,
+            "descricao": "Usado em feitiçaria de fogo.",
+            "imagem": "caminho/para/imagem_citrino_fogo.jpg"
+        },
+        {
+            "nome": "Rubi de Sangue",
+            "material": "Cristal raro",
+            "tipo": "Mineral",
+            "valor": 330,
+            "descricao": "Usado em feitiçaria que aumenta a potência dos ataques.",
+            "imagem": "caminho/para/imagem_rubi_sangue.jpg"
+        }
+    ]
+}
